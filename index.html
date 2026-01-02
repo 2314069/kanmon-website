@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>感門之盟 | イシス編集学校</title>
+  <meta name="description" content="感門之盟 - イシス編集学校の修了式・交流会イベント">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-background: #FFFAF5;
+      --color-text: #2C2825;
+      --color-caption: #575757;
+      --color-headline: #171615;
+      --color-accent: #E07B4C;
+      --color-accent-light: #FFF0E8;
+      --color-divider: #E0D6CC;
+      --color-footer-bg: #2C2825;
+      --color-footer-text: #F7F7F7;
+      --font-jp: 'Noto Sans JP', sans-serif;
+      --font-en: 'Outfit', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-jp);
+      background-color: var(--color-background);
+      color: var(--color-text);
+      line-height: 1.8;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--color-background);
+      border-bottom: 1px solid var(--color-divider);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-jp);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--color-text);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+    }
+
+    .nav-items {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-items a {
+      font-family: var(--font-jp);
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--color-text);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.3s;
+    }
+
+    .nav-items a:hover {
+      color: var(--color-accent);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--color-text);
+      transition: 0.3s;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding-top: 120px;
+      padding-bottom: 80px;
+    }
+
+    .hero-content {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .hero-date {
+      display: inline-block;
+      background: var(--color-accent);
+      color: white;
+      padding: 8px 24px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--color-headline);
+      letter-spacing: 0.15em;
+      margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--color-caption);
+      letter-spacing: 0.1em;
+    }
+
+    .hero-image-container {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: linear-gradient(135deg, var(--color-accent-light) 0%, #FFE4D6 100%);
+    }
+
+    .hero-badge {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: white;
+      padding: 16px 24px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .hero-badge-label {
+      font-size: 12px;
+      color: var(--color-caption);
+      margin-bottom: 4px;
+    }
+
+    .hero-badge-text {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-headline);
+    }
+
+    /* Section Common */
+    .section {
+      padding: 100px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-caption {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--color-headline);
+      letter-spacing: 0.1em;
+    }
+
+    /* Event Overview */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .overview-card {
+      background: white;
+      padding: 32px;
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    .overview-card-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+
+    .overview-card-label {
+      font-size: 14px;
+      color: var(--color-caption);
+      margin-bottom: 8px;
+    }
+
+    .overview-card-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--color-headline);
+    }
+
+    /* Timetable */
+    .timetable {
+      background: white;
+      border-radius: 24px;
+      padding: 48px;
+    }
+
+    .timetable-item {
+      display: flex;
+      gap: 32px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--color-divider);
+    }
+
+    .timetable-item:last-child {
+      border-bottom: none;
+    }
+
+    .timetable-time {
+      flex-shrink: 0;
+      width: 100px;
+      font-family: var(--font-en);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-accent);
+    }
+
+    .timetable-content {
+      flex-grow: 1;
+    }
+
+    .timetable-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-headline);
+      margin-bottom: 8px;
+    }
+
+    .timetable-description {
+      font-size: 14px;
+      color: var(--color-caption);
+    }
+
+    /* Speakers */
+    .speakers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .speaker-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .speaker-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .speaker-image {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      background: var(--color-accent-light);
+    }
+
+    .speaker-info {
+      padding: 24px;
+    }
+
+    .speaker-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--color-headline);
+      margin-bottom: 8px;
+    }
+
+    .speaker-role {
+      font-size: 14px;
+      color: var(--color-caption);
+      margin-bottom: 12px;
+    }
+
+    .speaker-description {
+      font-size: 14px;
+      color: var(--color-text);
+      line-height: 1.8;
+    }
+
+    /* Info Section */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .info-card {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .info-card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-headline);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--color-accent);
+    }
+
+    .info-list {
+      list-style: none;
+    }
+
+    .info-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--color-divider);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .info-list li:last-child {
+      border-bottom: none;
+    }
+
+    .info-list-icon {
+      color: var(--color-accent);
+      font-size: 18px;
+    }
+
+    /* Access */
+    .access-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .access-map {
+      height: 400px;
+      background: var(--color-divider);
+    }
+
+    .access-map iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .access-info {
+      padding: 40px;
+    }
+
+    .access-venue {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--color-headline);
+      margin-bottom: 16px;
+    }
+
+    .access-address {
+      font-size: 16px;
+      color: var(--color-text);
+      margin-bottom: 24px;
+    }
+
+    .access-detail {
+      margin-bottom: 16px;
+    }
+
+    .access-detail-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-caption);
+      margin-bottom: 4px;
+    }
+
+    .access-detail-value {
+      font-size: 16px;
+      color: var(--color-text);
+    }
+
+    /* Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .gallery-item {
+      aspect-ratio: 1;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.02);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: var(--color-accent-light);
+    }
+
+    /* CTA */
+    .cta {
+      text-align: center;
+      padding: 100px 0;
+    }
+
+    .cta-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--color-headline);
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-accent);
+      color: white;
+      padding: 16px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 700;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #C96A3F;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--color-footer-bg);
+      color: var(--color-footer-text);
+      padding: 60px 0 30px;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .footer-logo {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      color: var(--color-footer-text);
+      text-decoration: none;
+      font-size: 14px;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-copyright {
+      font-size: 14px;
+      opacity: 0.6;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .overview-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .speakers-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .access-content {
+        grid-template-columns: 1fr;
+      }
+
+      .access-map {
+        height: 300px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 0 20px;
+      }
+
+      .nav-inner {
+        padding: 0 20px;
+      }
+
+      .nav-items {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .hero {
+        padding-top: 100px;
+        padding-bottom: 60px;
+      }
+
+      .hero-title {
+        font-size: 32px;
+      }
+
+      .hero-image-container {
+        height: 300px;
+        border-radius: 16px;
+      }
+
+      .section {
+        padding: 60px 0;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+
+      .speakers-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timetable {
+        padding: 24px;
+      }
+
+      .timetable-item {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 24px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">感門之盟</a>
+      <div class="nav-items">
+        <a href="#overview">イベント概要</a>
+        <a href="#timetable">タイムテーブル</a>
+        <a href="#speakers">登壇者</a>
+        <a href="#info">参加案内</a>
+        <a href="#access">アクセス</a>
+        <a href="#contact">お問い合わせ</a>
+      </div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero container">
+    <div class="hero-content">
+      <span class="hero-date">2025.00.00 SUN</span>
+      <h1 class="hero-title">感門之盟</h1>
+      <p class="hero-subtitle">イシス編集学校 修了式・交流会</p>
+    </div>
+    <div class="hero-image-container">
+      <!-- 画像を設定してください -->
+      <div class="hero-image"></div>
+      <div class="hero-badge">
+        <div class="hero-badge-label">参加者</div>
+        <div class="hero-badge-text">約100名</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Event Overview -->
+    <section id="overview" class="section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-caption">Event Overview</p>
+          <h2 class="section-title">イベント概要</h2>
+        </div>
+        <div class="overview-grid">
+          <div class="overview-card">
+            <div class="overview-card-icon">📅</div>
+            <div class="overview-card-label">開催日時</div>
+            <div class="overview-card-value">2025年00月00日（日）<br>13:00〜18:00</div>
+          </div>
+          <div class="overview-card">
+            <div class="overview-card-icon">📍</div>
+            <div class="overview-card-label">会場</div>
+            <div class="overview-card-value">会場名<br>〒000-0000 住所</div>
+          </div>
+          <div class="overview-card">
+            <div class="overview-card-icon">👥</div>
+            <div class="overview-card-label">参加者</div>
+            <div class="overview-card-value">約100名</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timetable -->
+    <section id="timetable" class="section" style="background: var(--color-accent-light);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-caption">Timetable</p>
+          <h2 class="section-title">タイムテーブル</h2>
+        </div>
+        <div class="timetable">
+          <div class="timetable-item">
+            <div class="timetable-time">13:00</div>
+            <div class="timetable-content">
+              <div class="timetable-title">開場・受付</div>
+              <div class="timetable-description">受付にてお名前をお伝えください</div>
+            </div>
+          </div>
+          <div class="timetable-item">
+            <div class="timetable-time">13:30</div>
+            <div class="timetable-content">
+              <div class="timetable-title">開会挨拶</div>
+              <div class="timetable-description">校長挨拶・本日の流れ説明</div>
+            </div>
+          </div>
+          <div class="timetable-item">
+            <div class="timetable-time">14:00</div>
+            <div class="timetable-content">
+              <div class="timetable-title">修了式</div>
+              <div class="timetable-description">修了証授与・優秀作品発表</div>
+            </div>
+          </div>
+          <div class="timetable-item">
+            <div class="timetable-time">15:30</div>
+            <div class="timetable-content">
+              <div class="timetable-title">休憩</div>
+              <div class="timetable-description">軽食・ドリンクをご用意しています</div>
+            </div>
+          </div>
+          <div class="timetable-item">
+            <div class="timetable-time">16:00</div>
+            <div class="timetable-content">
+              <div class="timetable-title">交流会</div>
+              <div class="timetable-description">参加者同士の交流・歓談</div>
+            </div>
+          </div>
+          <div class="timetable-item">
+            <div class="timetable-time">17:30</div>
+            <div class="timetable-content">
+              <div class="timetable-title">閉会挨拶</div>
+              <div class="timetable-description">次回のご案内</div>
+            </div>
+          </div>
+          <div class="timetable-item">
+            <div class="timetable-time">18:00</div>
+            <div class="timetable-content">
+              <div class="timetable-title">終了</div>
+              <div class="timetable-description">お気をつけてお帰りください</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Speakers -->
+    <section id="speakers" class="section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-caption">Speakers</p>
+          <h2 class="section-title">登壇者紹介</h2>
+        </div>
+        <div class="speakers-grid">
+          <div class="speaker-card">
+            <div class="speaker-image"></div>
+            <div class="speaker-info">
+              <div class="speaker-name">登壇者名</div>
+              <div class="speaker-role">肩書き・所属</div>
+              <div class="speaker-description">登壇者の紹介文が入ります。経歴や活動内容など。</div>
+            </div>
+          </div>
+          <div class="speaker-card">
+            <div class="speaker-image"></div>
+            <div class="speaker-info">
+              <div class="speaker-name">登壇者名</div>
+              <div class="speaker-role">肩書き・所属</div>
+              <div class="speaker-description">登壇者の紹介文が入ります。経歴や活動内容など。</div>
+            </div>
+          </div>
+          <div class="speaker-card">
+            <div class="speaker-image"></div>
+            <div class="speaker-info">
+              <div class="speaker-name">登壇者名</div>
+              <div class="speaker-role">肩書き・所属</div>
+              <div class="speaker-description">登壇者の紹介文が入ります。経歴や活動内容など。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Info Section -->
+    <section id="info" class="section" style="background: var(--color-accent-light);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-caption">Information</p>
+          <h2 class="section-title">参加案内</h2>
+        </div>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 class="info-card-title">受付について</h3>
+            <ul class="info-list">
+              <li>
+                <span class="info-list-icon">●</span>
+                <span>受付開始は13:00からです</span>
+              </li>
+              <li>
+                <span class="info-list-icon">●</span>
+                <span>受付にてお名前をお伝えください</span>
+              </li>
+              <li>
+                <span class="info-list-icon">●</span>
+                <span>名札をお渡しします</span>
+              </li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card-title">持ち物</h3>
+            <ul class="info-list">
+              <li>
+                <span class="info-list-icon">●</span>
+                <span>参加証（メールでお送りしたもの）</span>
+              </li>
+              <li>
+                <span class="info-list-icon">●</span>
+                <span>筆記用具</span>
+              </li>
+              <li>
+                <span class="info-list-icon">●</span>
+                <span>名刺（お持ちの方）</span>
+              </li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card-title">服装</h3>
+            <ul class="info-list">
+              <li>
+                <span class="info-list-icon">●</span>
+                <span>カジュアルな服装でお越しください</span>
+              </li>
+              <li>
+                <span class="info-list-icon">●</span>
+                <span>会場は空調が効いています</span>
+              </li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3 class="info-card-title">注意事項</h3>
+            <ul class="info-list">
+              <li>
+                <span class="info-list-icon">●</span>
+                <span>会場内での撮影・録音はご遠慮ください</span>
+              </li>
+              <li>
+                <span class="info-list-icon">●</span>
+                <span>お車でのご来場はご遠慮ください</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Access -->
+    <section id="access" class="section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-caption">Access</p>
+          <h2 class="section-title">アクセス</h2>
+        </div>
+        <div class="access-content">
+          <div class="access-map">
+            <!-- Google Maps埋め込み用 -->
+            <div style="width:100%;height:100%;background:var(--color-divider);display:flex;align-items:center;justify-content:center;color:var(--color-caption);">
+              Google Maps
+            </div>
+          </div>
+          <div class="access-info">
+            <h3 class="access-venue">会場名</h3>
+            <p class="access-address">〒000-0000<br>東京都○○区○○ 0-0-0</p>
+            <div class="access-detail">
+              <div class="access-detail-label">最寄り駅</div>
+              <div class="access-detail-value">○○線「○○駅」徒歩5分</div>
+            </div>
+            <div class="access-detail">
+              <div class="access-detail-label">バス</div>
+              <div class="access-detail-value">○○バス「○○」停留所 徒歩3分</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="section" style="background: var(--color-accent-light);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-caption">Gallery</p>
+          <h2 class="section-title">過去開催の様子</h2>
+        </div>
+        <div class="gallery-grid">
+          <div class="gallery-item"><div style="width:100%;height:100%;background:var(--color-divider);"></div></div>
+          <div class="gallery-item"><div style="width:100%;height:100%;background:var(--color-divider);"></div></div>
+          <div class="gallery-item"><div style="width:100%;height:100%;background:var(--color-divider);"></div></div>
+          <div class="gallery-item"><div style="width:100%;height:100%;background:var(--color-divider);"></div></div>
+          <div class="gallery-item"><div style="width:100%;height:100%;background:var(--color-divider);"></div></div>
+          <div class="gallery-item"><div style="width:100%;height:100%;background:var(--color-divider);"></div></div>
+          <div class="gallery-item"><div style="width:100%;height:100%;background:var(--color-divider);"></div></div>
+          <div class="gallery-item"><div style="width:100%;height:100%;background:var(--color-divider);"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contact" class="cta">
+      <div class="container">
+        <h2 class="cta-title">ご質問・お問い合わせ</h2>
+        <a href="#" class="btn">お問い合わせフォームへ</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">感門之盟</div>
+        <div class="footer-links">
+          <a href="#">イシス編集学校</a>
+          <a href="#">お問い合わせ</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; イシス編集学校 All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
