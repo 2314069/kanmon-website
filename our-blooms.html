@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>感門之盟</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Caprasimo';
+      src: url('https://fonts.gstatic.com/s/caprasimo/v6/esDT31JQOPuXIUGBp72klZUCGpG-GQ.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-background: #FFFFFF;
+      --color-link: #2C2825;
+      --color-caption: #575757;
+      --color-headline: #171615;
+      --color-accent: #FFC800;
+      --color-divider: #595959;
+      --color-footer-text: #F7F7F7;
+      --font-display: 'Caprasimo', serif;
+      --font-body: 'Outfit', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--color-background);
+      color: var(--color-link);
+      line-height: 1.4;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--color-background);
+      border-bottom: 1px solid var(--color-divider);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 82px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 30px;
+      color: var(--color-link);
+      text-decoration: none;
+      letter-spacing: -0.9px;
+      line-height: 0.92;
+    }
+
+    .nav-items {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .nav-items a {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--color-link);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.28px;
+    }
+
+    .nav-items a:hover {
+      opacity: 0.7;
+    }
+
+    .nav-mobile {
+      display: none;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #000;
+    }
+
+    /* Header */
+    .header {
+      padding-top: 150px;
+      padding-bottom: 0;
+    }
+
+    .logo-section {
+      margin-bottom: 44px;
+    }
+
+    .logo-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .hero-image-container {
+      position: relative;
+      width: 100%;
+      height: 570px;
+      border-radius: 30px;
+      overflow: hidden;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .sticker {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      width: 213px;
+      height: 213px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 50px;
+    }
+
+    .sticker-outline {
+      position: absolute;
+      width: 188px;
+      height: 188px;
+    }
+
+    .sticker-outline svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .sticker-content {
+      position: relative;
+      text-align: center;
+      color: #000;
+    }
+
+    .sticker-new {
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.28px;
+      margin-bottom: 8px;
+    }
+
+    .sticker-offer {
+      font-weight: 500;
+      font-size: 24px;
+      letter-spacing: -0.24px;
+      margin-bottom: 8px;
+    }
+
+    .sticker-special {
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.24px;
+    }
+
+    /* Who We Are Section */
+    .who-we-are {
+      padding: 120px 0;
+      text-align: center;
+    }
+
+    .section-caption {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--color-caption);
+      text-transform: uppercase;
+      letter-spacing: 0.28px;
+      margin-bottom: 20px;
+    }
+
+    .section-heading {
+      font-weight: 700;
+      font-size: 40px;
+      color: var(--color-headline);
+      line-height: 1.1;
+      letter-spacing: -1px;
+      max-width: 740px;
+      margin: 0 auto 40px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--color-accent);
+      color: var(--color-link);
+      padding: 8px 12px 6px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.22px;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .btn-dot {
+      width: 4px;
+      height: 4px;
+      background: var(--color-link);
+      border-radius: 50%;
+    }
+
+    /* Carousel */
+    .carousel {
+      display: flex;
+      gap: 20px;
+      padding: 0 40px 75px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-item {
+      flex-shrink: 0;
+      width: 300px;
+      height: 300px;
+      border-radius: 30px;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* What We Do Title */
+    .what-we-do-title {
+      text-align: center;
+      padding: 0 40px;
+    }
+
+    .what-we-do-title h2 {
+      font-weight: 700;
+      font-size: 50px;
+      color: var(--color-headline);
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      margin-bottom: 40px;
+    }
+
+    .what-we-do-title p {
+      font-size: 16px;
+      color: var(--color-link);
+      letter-spacing: -0.4px;
+      margin-bottom: 40px;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--color-divider);
+    }
+
+    /* Services */
+    .services {
+      padding: 100px 40px;
+    }
+
+    .service-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 80px;
+      padding-bottom: 40px;
+      margin-bottom: 40px;
+    }
+
+    .service-number {
+      font-weight: 700;
+      font-size: 50px;
+      color: var(--color-headline);
+      text-transform: uppercase;
+      letter-spacing: -1px;
+    }
+
+    .service-image {
+      width: 145px;
+      height: 145px;
+      border-radius: 30px;
+      overflow: hidden;
+    }
+
+    .service-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .service-content {
+      text-align: center;
+    }
+
+    .service-title {
+      font-weight: 700;
+      font-size: 50px;
+      color: var(--color-headline);
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      margin-bottom: 30px;
+    }
+
+    .service-description {
+      font-size: 16px;
+      color: var(--color-link);
+      letter-spacing: -0.4px;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* Feature Image */
+    .feature-image {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .feature-image img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1200 / 751;
+      object-fit: cover;
+      border-radius: 30px;
+    }
+
+    /* Work With Us */
+    .work-with-us {
+      padding: 200px 0;
+      text-align: center;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 0 40px;
+    }
+
+    .footer-inner {
+      position: relative;
+      border-radius: 30px 30px 0 0;
+      overflow: hidden;
+      padding: 400px 30px 20px;
+    }
+
+    .footer-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+    }
+
+    .footer-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .footer-bg::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, #4b4605 100%);
+    }
+
+    .footer-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 117px;
+      color: var(--color-footer-text);
+      letter-spacing: -3.5px;
+      line-height: 0.92;
+      margin-bottom: 20px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+      font-size: 24px;
+      color: var(--color-footer-text);
+      letter-spacing: -0.24px;
+    }
+
+    .footer-bottom a {
+      color: var(--color-footer-text);
+      text-decoration: none;
+    }
+
+    .footer-bottom a:hover {
+      opacity: 0.8;
+    }
+
+    /* Tablet Styles */
+    @media (max-width: 900px) {
+      .container {
+        padding: 0 40px;
+      }
+
+      .nav-inner {
+        padding: 0 40px;
+      }
+
+      .header {
+        padding-top: 136px;
+      }
+
+      .hero-image-container {
+        height: 570px;
+      }
+
+      .section-heading {
+        font-size: 32px;
+        max-width: 412px;
+      }
+
+      .carousel-item {
+        width: 300px;
+        height: 300px;
+      }
+
+      .what-we-do-title h2 {
+        font-size: 40px;
+      }
+
+      .service-title {
+        font-size: 40px;
+      }
+
+      .feature-image img {
+        aspect-ratio: 720 / 451;
+      }
+
+      .work-with-us {
+        padding: 150px 0;
+      }
+
+      .footer-inner {
+        padding: 400px 30px 20px;
+      }
+
+      .footer-logo {
+        font-size: 100px;
+      }
+
+      .footer-bottom {
+        font-size: 20px;
+      }
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 600px) {
+      .container {
+        padding: 0 40px;
+      }
+
+      .nav-inner {
+        height: 70px;
+        padding: 0 16px;
+      }
+
+      .nav-logo {
+        font-size: 20px;
+        letter-spacing: -0.6px;
+      }
+
+      .nav-items {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .header {
+        padding-top: 106px;
+      }
+
+      .logo-section {
+        margin-bottom: 24px;
+        padding: 0 16px;
+      }
+
+      .logo-image {
+        height: 35px;
+        width: auto;
+      }
+
+      .hero-image-container {
+        height: 570px;
+        margin: 0 16px;
+        border-radius: 20px;
+      }
+
+      .sticker {
+        width: 150px;
+        height: 150px;
+        padding: 30px;
+      }
+
+      .sticker-outline {
+        width: 130px;
+        height: 130px;
+      }
+
+      .sticker-offer {
+        font-size: 16px;
+      }
+
+      .sticker-new,
+      .sticker-special {
+        font-size: 10px;
+      }
+
+      .who-we-are {
+        padding: 120px 40px;
+      }
+
+      .section-caption {
+        font-size: 12px;
+      }
+
+      .section-heading {
+        font-size: 26px;
+        max-width: 215px;
+      }
+
+      .carousel {
+        padding: 0 20px 50px;
+        gap: 14px;
+      }
+
+      .carousel-item {
+        width: 200px;
+        height: 200px;
+        border-radius: 20px;
+      }
+
+      .what-we-do-title {
+        padding: 0 20px;
+      }
+
+      .what-we-do-title h2 {
+        font-size: 30px;
+        margin-bottom: 30px;
+      }
+
+      .what-we-do-title p {
+        font-size: 14px;
+        margin-bottom: 30px;
+      }
+
+      .services {
+        padding: 100px 20px;
+      }
+
+      .service-item {
+        gap: 40px;
+      }
+
+      .service-number {
+        font-size: 30px;
+      }
+
+      .service-image {
+        width: 145px;
+        height: 145px;
+        border-radius: 20px;
+      }
+
+      .service-title {
+        font-size: 30px;
+        margin-bottom: 20px;
+      }
+
+      .service-description {
+        font-size: 14px;
+      }
+
+      .feature-image {
+        padding: 0 20px;
+      }
+
+      .feature-image img {
+        aspect-ratio: 295 / 400;
+        border-radius: 20px;
+      }
+
+      .work-with-us {
+        padding: 150px 40px;
+      }
+
+      .footer {
+        padding: 0 20px;
+      }
+
+      .footer-inner {
+        padding: 300px 16px 20px;
+        border-radius: 20px 20px 0 0;
+      }
+
+      .footer-logo {
+        font-size: 80px;
+      }
+
+      .footer-bottom {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">感門之盟</a>
+      <div class="nav-items">
+        <a href="#">ギャラリー</a>
+        <a href="#">私たちについて</a>
+        <a href="mailto:hello@figma.com">お問い合わせ</a>
+      </div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="header container">
+    <div class="logo-section">
+      <img src="http://localhost:3845/assets/bae4ccb48424ebcc705accc6dc8ff16e72ea2b06.png" alt="Our Blooms®" class="logo-image">
+    </div>
+    <div class="hero-image-container">
+      <img src="http://localhost:3845/assets/c110a9e8a11a0ce5b41a9d78a9bdb36d21efd18a.png" alt="美しいピンクのバラ" class="hero-image">
+      <div class="sticker">
+        <svg class="sticker-outline" viewBox="0 0 185 185" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="92.5" cy="92.5" r="90" stroke="#000" stroke-width="2" stroke-dasharray="8 4"/>
+        </svg>
+        <div class="sticker-content">
+          <div class="sticker-new">新着</div>
+          <div class="sticker-offer">初回注文10%オフ</div>
+          <div class="sticker-special">特別</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Who We Are -->
+    <section class="who-we-are">
+      <p class="section-caption">私たちについて</p>
+      <h2 class="section-heading">私たちは感門之盟です。あなたの花物語を見つけるお手伝いをします。</h2>
+      <a href="#" class="btn">
+        <span class="btn-dot"></span>
+        詳しく見る
+      </a>
+    </section>
+
+    <!-- Carousel -->
+    <section class="carousel">
+      <div class="carousel-item">
+        <img src="http://localhost:3845/assets/4beb60807d0616014ca65882290c83d6d93d193c.png" alt="ピンクのバラ">
+      </div>
+      <div class="carousel-item">
+        <img src="http://localhost:3845/assets/949224d279b17f4880fe80e5c8c6070056fb2684.png" alt="白いバラ">
+      </div>
+      <div class="carousel-item">
+        <img src="http://localhost:3845/assets/49c791ba625093bb7368902a40e204133daff14a.png" alt="ピンクのバラのアレンジメント">
+      </div>
+      <div class="carousel-item">
+        <img src="http://localhost:3845/assets/2ae60908abd44e4b8a8fae1a0ce0cb93462cee40.png" alt="白いチューリップ">
+      </div>
+      <div class="carousel-item">
+        <img src="http://localhost:3845/assets/63a2318bbf0d1c3d666d1a4a939cb61a6ffaf562.png" alt="蘭">
+      </div>
+    </section>
+
+    <!-- What We Do Title -->
+    <section class="what-we-do-title">
+      <h2>私たちのサービス</h2>
+      <p>シンプルな魔法をあなたの世界にお届けします。</p>
+      <div class="divider"></div>
+    </section>
+
+    <!-- Services -->
+    <section class="services">
+      <!-- Service 1 -->
+      <article class="service-item">
+        <span class="service-number">1</span>
+        <div class="service-image">
+          <img src="http://localhost:3845/assets/9d94b444d3257d1c871f4b12708b2b8276ade07e.png" alt="ブーケを持つ人">
+        </div>
+        <div class="service-content">
+          <h3 class="service-title">フローラルインスタレーション</h3>
+          <p class="service-description">ご自宅、ビジネス、イベントのための生きたアート。</p>
+        </div>
+        <div class="divider"></div>
+      </article>
+
+      <!-- Service 2 -->
+      <article class="service-item">
+        <span class="service-number">2</span>
+        <div class="service-image">
+          <img src="http://localhost:3845/assets/ffe6b95cf2d9f7c3d88d3c92d37906619048b58e.png" alt="ブーケを作る人">
+        </div>
+        <div class="service-content">
+          <h3 class="service-title">ネイティブプラントアレンジメント</h3>
+          <p class="service-description">プライベートな空間でも公共の場でも、期待を超える花の体験をお届けします。</p>
+        </div>
+        <div class="divider"></div>
+      </article>
+
+      <!-- Service 3 -->
+      <article class="service-item">
+        <span class="service-number">3</span>
+        <div class="service-image">
+          <img src="http://localhost:3845/assets/758aedbb7ae73f71c29b1186d88d1b4a5cc43b71.png" alt="ピンクのチューリップ">
+        </div>
+        <div class="service-content">
+          <h3 class="service-title">カスタムフローラルコンセプト</h3>
+          <p class="service-description">あなたのビジョン、私たちの花。パーソナルでありながら絶妙にシンプルなアレンジメントをお作りします。プライベートな空間でも公共の場でも、期待を超える花の体験をお届けします。</p>
+        </div>
+        <div class="divider"></div>
+      </article>
+    </section>
+
+    <!-- Feature Image -->
+    <section class="feature-image">
+      <img src="http://localhost:3845/assets/12de9112bfa4a10d1e419e65d1a8d18bc73a5df7.png" alt="紫の花">
+    </section>
+
+    <!-- Work With Us -->
+    <section class="work-with-us">
+      <p class="section-caption">お仕事のご依頼</p>
+      <h2 class="section-heading">次のイベントに自然の美しさを添えるお手伝いをいたします。</h2>
+      <a href="#" class="btn">
+        <span class="btn-dot"></span>
+        お問い合わせ
+      </a>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-bg">
+        <img src="http://localhost:3845/assets/276071b0339859d652ec6820f735764980a16dc3.png" alt="オレンジの花">
+      </div>
+      <div class="footer-content">
+        <div class="footer-logo">OB.</div>
+        <div class="footer-bottom">
+          <span>東京</span>
+          <a href="#">お問い合わせ</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
