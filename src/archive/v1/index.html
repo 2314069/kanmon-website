@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>感門之盟 | イシス編集学校</title>
+  <title>90・91回感門之盟 | イシス編集学校</title>
   <meta name="description" content="感門之盟 - イシス編集学校の修了式・交流会イベント">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -181,6 +181,24 @@
       color: var(--color-headline);
     }
 
+    /* About Section */
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about-text {
+      font-size: 18px;
+      line-height: 2;
+      color: var(--color-text);
+      margin-bottom: 24px;
+    }
+
+    .about-text:last-child {
+      margin-bottom: 0;
+    }
+
     /* Section Common */
     .section {
       padding: 100px 0;
@@ -239,10 +257,65 @@
     }
 
     /* Timetable */
+    .timetable-tabs {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+
+    .timetable-tab {
+      background: white;
+      border: 2px solid var(--color-divider);
+      padding: 16px 32px;
+      border-radius: 50px;
+      font-family: var(--font-jp);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .timetable-tab:hover {
+      border-color: var(--color-accent);
+    }
+
+    .timetable-tab.active {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      color: white;
+    }
+
     .timetable {
       background: white;
       border-radius: 24px;
       padding: 48px;
+    }
+
+    .timetable-day-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--color-accent);
+    }
+
+    .timetable-day-label {
+      background: var(--color-accent);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: var(--font-en);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .timetable-day-date {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-headline);
     }
 
     .timetable-item {
@@ -277,6 +350,13 @@
     }
 
     .timetable-description {
+      font-size: 14px;
+      color: var(--color-caption);
+    }
+
+    .timetable-note {
+      text-align: center;
+      margin-top: 24px;
       font-size: 14px;
       color: var(--color-caption);
     }
@@ -531,6 +611,74 @@
       opacity: 0.6;
     }
 
+    /* Mobile Menu */
+    .nav-items.active {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: var(--color-background);
+      padding: 24px;
+      border-bottom: 1px solid var(--color-divider);
+      gap: 16px;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .lightbox-image {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 32px;
+      cursor: pointer;
+      padding: 8px;
+    }
+
     /* Responsive */
     @media (max-width: 900px) {
       .overview-grid {
@@ -601,8 +749,24 @@
         grid-template-columns: 1fr;
       }
 
+      .timetable-tabs {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .timetable-tab {
+        padding: 12px 24px;
+        font-size: 14px;
+      }
+
       .timetable {
         padding: 24px;
+      }
+
+      .timetable-day-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
       }
 
       .timetable-item {
@@ -622,14 +786,13 @@
   <!-- Navigation -->
   <nav class="nav">
     <div class="nav-inner">
-      <a href="#" class="nav-logo">感門之盟</a>
+      <a href="index.html" class="nav-logo">感門之盟</a>
       <div class="nav-items">
-        <a href="#overview">イベント概要</a>
-        <a href="#timetable">タイムテーブル</a>
-        <a href="#speakers">登壇者</a>
-        <a href="#info">参加案内</a>
+        <a href="index.html">トップ</a>
+        <a href="program.html">プログラム</a>
+        <a href="classroom.html">教室一覧</a>
+        <a href="info.html">参加案内</a>
         <a href="#access">アクセス</a>
-        <a href="#contact">お問い合わせ</a>
       </div>
       <div class="hamburger">
         <span></span>
@@ -642,23 +805,33 @@
   <!-- Hero Section -->
   <header class="hero container">
     <div class="hero-content">
-      <span class="hero-date">2025.00.00 SUN</span>
-      <h1 class="hero-title">感門之盟</h1>
-      <p class="hero-subtitle">イシス編集学校 修了式・交流会</p>
+      <span class="hero-date">2026.3.20 FRI - 21 SAT</span>
+      <h1 class="hero-title">90・91回感門之盟</h1>
+      <p class="hero-subtitle">イシス編集学校 講座修了式</p>
     </div>
     <div class="hero-image-container">
-      <!-- 画像を設定してください -->
-      <div class="hero-image"></div>
-      <div class="hero-badge">
-        <div class="hero-badge-label">参加者</div>
-        <div class="hero-badge-text">約100名</div>
-      </div>
+      <img src="../assets/images/hero.png" alt="感門之盟の様子" class="hero-image">
     </div>
   </header>
 
   <main>
+    <!-- About Kanmon -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-caption">About</p>
+          <h2 class="section-title">感門之盟とは</h2>
+        </div>
+        <div class="about-content">
+          <p class="about-text">
+            感門之盟(かんもんのめい)は、イシス編集学校での講座修了ごとに学びをともにしたもの同士が一同に会する集いです。師範代をはじめ師範陣も学衆も場をともにして次の編集を企てる祝祭。王義之の蘭亭の会に由来します。
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- Event Overview -->
-    <section id="overview" class="section">
+    <section id="overview" class="section" style="background: white;">
       <div class="container">
         <div class="section-header">
           <p class="section-caption">Event Overview</p>
@@ -668,12 +841,12 @@
           <div class="overview-card">
             <div class="overview-card-icon">📅</div>
             <div class="overview-card-label">開催日時</div>
-            <div class="overview-card-value">2025年00月00日（日）<br>13:00〜18:00</div>
+            <div class="overview-card-value">2026年3月20日（金）・21日（土）<br>13:00〜18:00</div>
           </div>
           <div class="overview-card">
             <div class="overview-card-icon">📍</div>
             <div class="overview-card-label">会場</div>
-            <div class="overview-card-value">会場名<br>〒000-0000 住所</div>
+            <div class="overview-card-value">豪徳寺 本楼</div>
           </div>
           <div class="overview-card">
             <div class="overview-card-icon">👥</div>
@@ -684,174 +857,6 @@
       </div>
     </section>
 
-    <!-- Timetable -->
-    <section id="timetable" class="section" style="background: var(--color-accent-light);">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-caption">Timetable</p>
-          <h2 class="section-title">タイムテーブル</h2>
-        </div>
-        <div class="timetable">
-          <div class="timetable-item">
-            <div class="timetable-time">13:00</div>
-            <div class="timetable-content">
-              <div class="timetable-title">開場・受付</div>
-              <div class="timetable-description">受付にてお名前をお伝えください</div>
-            </div>
-          </div>
-          <div class="timetable-item">
-            <div class="timetable-time">13:30</div>
-            <div class="timetable-content">
-              <div class="timetable-title">開会挨拶</div>
-              <div class="timetable-description">校長挨拶・本日の流れ説明</div>
-            </div>
-          </div>
-          <div class="timetable-item">
-            <div class="timetable-time">14:00</div>
-            <div class="timetable-content">
-              <div class="timetable-title">修了式</div>
-              <div class="timetable-description">修了証授与・優秀作品発表</div>
-            </div>
-          </div>
-          <div class="timetable-item">
-            <div class="timetable-time">15:30</div>
-            <div class="timetable-content">
-              <div class="timetable-title">休憩</div>
-              <div class="timetable-description">軽食・ドリンクをご用意しています</div>
-            </div>
-          </div>
-          <div class="timetable-item">
-            <div class="timetable-time">16:00</div>
-            <div class="timetable-content">
-              <div class="timetable-title">交流会</div>
-              <div class="timetable-description">参加者同士の交流・歓談</div>
-            </div>
-          </div>
-          <div class="timetable-item">
-            <div class="timetable-time">17:30</div>
-            <div class="timetable-content">
-              <div class="timetable-title">閉会挨拶</div>
-              <div class="timetable-description">次回のご案内</div>
-            </div>
-          </div>
-          <div class="timetable-item">
-            <div class="timetable-time">18:00</div>
-            <div class="timetable-content">
-              <div class="timetable-title">終了</div>
-              <div class="timetable-description">お気をつけてお帰りください</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Speakers -->
-    <section id="speakers" class="section">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-caption">Speakers</p>
-          <h2 class="section-title">登壇者紹介</h2>
-        </div>
-        <div class="speakers-grid">
-          <div class="speaker-card">
-            <div class="speaker-image"></div>
-            <div class="speaker-info">
-              <div class="speaker-name">登壇者名</div>
-              <div class="speaker-role">肩書き・所属</div>
-              <div class="speaker-description">登壇者の紹介文が入ります。経歴や活動内容など。</div>
-            </div>
-          </div>
-          <div class="speaker-card">
-            <div class="speaker-image"></div>
-            <div class="speaker-info">
-              <div class="speaker-name">登壇者名</div>
-              <div class="speaker-role">肩書き・所属</div>
-              <div class="speaker-description">登壇者の紹介文が入ります。経歴や活動内容など。</div>
-            </div>
-          </div>
-          <div class="speaker-card">
-            <div class="speaker-image"></div>
-            <div class="speaker-info">
-              <div class="speaker-name">登壇者名</div>
-              <div class="speaker-role">肩書き・所属</div>
-              <div class="speaker-description">登壇者の紹介文が入ります。経歴や活動内容など。</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Info Section -->
-    <section id="info" class="section" style="background: var(--color-accent-light);">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-caption">Information</p>
-          <h2 class="section-title">参加案内</h2>
-        </div>
-        <div class="info-grid">
-          <div class="info-card">
-            <h3 class="info-card-title">受付について</h3>
-            <ul class="info-list">
-              <li>
-                <span class="info-list-icon">●</span>
-                <span>受付開始は13:00からです</span>
-              </li>
-              <li>
-                <span class="info-list-icon">●</span>
-                <span>受付にてお名前をお伝えください</span>
-              </li>
-              <li>
-                <span class="info-list-icon">●</span>
-                <span>名札をお渡しします</span>
-              </li>
-            </ul>
-          </div>
-          <div class="info-card">
-            <h3 class="info-card-title">持ち物</h3>
-            <ul class="info-list">
-              <li>
-                <span class="info-list-icon">●</span>
-                <span>参加証（メールでお送りしたもの）</span>
-              </li>
-              <li>
-                <span class="info-list-icon">●</span>
-                <span>筆記用具</span>
-              </li>
-              <li>
-                <span class="info-list-icon">●</span>
-                <span>名刺（お持ちの方）</span>
-              </li>
-            </ul>
-          </div>
-          <div class="info-card">
-            <h3 class="info-card-title">服装</h3>
-            <ul class="info-list">
-              <li>
-                <span class="info-list-icon">●</span>
-                <span>カジュアルな服装でお越しください</span>
-              </li>
-              <li>
-                <span class="info-list-icon">●</span>
-                <span>会場は空調が効いています</span>
-              </li>
-            </ul>
-          </div>
-          <div class="info-card">
-            <h3 class="info-card-title">注意事項</h3>
-            <ul class="info-list">
-              <li>
-                <span class="info-list-icon">●</span>
-                <span>会場内での撮影・録音はご遠慮ください</span>
-              </li>
-              <li>
-                <span class="info-list-icon">●</span>
-                <span>お車でのご来場はご遠慮ください</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- Access -->
     <section id="access" class="section">
@@ -868,15 +873,11 @@
             </div>
           </div>
           <div class="access-info">
-            <h3 class="access-venue">会場名</h3>
-            <p class="access-address">〒000-0000<br>東京都○○区○○ 0-0-0</p>
+            <h3 class="access-venue">豪徳寺 本楼</h3>
+            <p class="access-address">〒154-0021<br>東京都世田谷区豪徳寺1-22-14</p>
             <div class="access-detail">
               <div class="access-detail-label">最寄り駅</div>
-              <div class="access-detail-value">○○線「○○駅」徒歩5分</div>
-            </div>
-            <div class="access-detail">
-              <div class="access-detail-label">バス</div>
-              <div class="access-detail-value">○○バス「○○」停留所 徒歩3分</div>
+              <div class="access-detail-value">小田急線「豪徳寺駅」徒歩5分<br>東急世田谷線「山下駅」徒歩5分</div>
             </div>
           </div>
         </div>
@@ -927,5 +928,82 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // Mobile Menu
+    const hamburger = document.querySelector('.hamburger');
+    const navItems = document.querySelector('.nav-items');
+
+    hamburger.addEventListener('click', () => {
+      navItems.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.nav-items a').forEach(link => {
+      link.addEventListener('click', () => {
+        navItems.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
+    });
+
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const headerOffset = 80;
+          const elementPosition = target.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Lightbox Gallery
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    // Create lightbox elements
+    const lightbox = document.createElement('div');
+    lightbox.className = 'lightbox';
+    lightbox.innerHTML = `
+      <div class="lightbox-content">
+        <button class="lightbox-close">&times;</button>
+        <img class="lightbox-image" src="" alt="">
+      </div>
+    `;
+    document.body.appendChild(lightbox);
+
+    const lightboxImage = lightbox.querySelector('.lightbox-image');
+    const lightboxClose = lightbox.querySelector('.lightbox-close');
+
+    galleryItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        if (img) {
+          lightboxImage.src = img.src;
+          lightbox.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+
+    lightboxClose.addEventListener('click', () => {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
 </body>
 </html>

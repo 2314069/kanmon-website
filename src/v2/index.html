@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>読奏エディストリート | 90回感門之盟</title>
+  <meta name="description" content="感門之盟 - イシス編集学校の講座修了式">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-dark: #1a1a1a;
+      --color-light: #ffffff;
+      --color-gray: #888888;
+      --color-accent: #8B9F6E;
+      --color-accent-dark: #6B7F4E;
+      --font-jp: 'Noto Sans JP', sans-serif;
+      --font-en: 'Outfit', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-jp);
+      background-color: var(--color-dark);
+      color: var(--color-light);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s;
+    }
+
+    .nav.scrolled {
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-logo {
+      font-family: var(--font-jp);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--color-light);
+      text-decoration: none;
+      letter-spacing: 0.2em;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 40px;
+    }
+
+    .nav-menu a {
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--color-light);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+
+    .nav-menu a:hover {
+      opacity: 1;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--color-light);
+      transition: 0.3s;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      opacity: 1;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(26,26,26,0.1) 0%, rgba(26,26,26,0.3) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .hero-date {
+      font-family: var(--font-en);
+      font-size: 14px;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      margin-bottom: 24px;
+      opacity: 0.9;
+    }
+
+    .hero-label {
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      opacity: 0.8;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-size: 56px;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      margin-bottom: 20px;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      opacity: 0.8;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      animation: bounce 2s infinite;
+    }
+
+    .scroll-indicator span {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+
+    .scroll-indicator::after {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: var(--color-light);
+      opacity: 0.4;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    /* Sections */
+    .section {
+      padding: 140px 60px;
+    }
+
+    .section-light {
+      background: var(--color-light);
+      color: var(--color-dark);
+    }
+
+    .section-accent {
+      background: var(--color-accent);
+      color: var(--color-light);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .section-label {
+      font-family: var(--font-en);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 36px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+    }
+
+    /* About */
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .about-text {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 2.2;
+      letter-spacing: 0.05em;
+    }
+
+    /* Overview Cards */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .overview-card {
+      text-align: center;
+      padding: 40px 20px;
+      border: 1px solid rgba(26,26,26,0.1);
+    }
+
+    .overview-icon {
+      font-size: 32px;
+      margin-bottom: 20px;
+      opacity: 0.8;
+    }
+
+    .overview-label {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin-bottom: 12px;
+    }
+
+    .overview-value {
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+    }
+
+    /* Timetable */
+    .timetable-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .timetable-day {
+      margin-bottom: 60px;
+    }
+
+    .timetable-day:last-child {
+      margin-bottom: 0;
+    }
+
+    .timetable-day-title {
+      font-family: var(--font-en);
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .timetable-item {
+      display: flex;
+      gap: 40px;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .timetable-time {
+      font-family: var(--font-en);
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      opacity: 0.6;
+      flex-shrink: 0;
+      width: 80px;
+    }
+
+    .timetable-content {
+      flex-grow: 1;
+    }
+
+    .timetable-title {
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+
+    .timetable-desc {
+      font-size: 13px;
+      opacity: 0.6;
+    }
+
+    /* Access */
+    .access-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .access-map {
+      aspect-ratio: 4/3;
+      background: rgba(255,255,255,0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .access-map iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .access-info h3 {
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      margin-bottom: 20px;
+    }
+
+    .access-address {
+      font-size: 15px;
+      line-height: 2;
+      opacity: 0.8;
+      margin-bottom: 24px;
+    }
+
+    .access-detail {
+      font-size: 14px;
+      opacity: 0.7;
+      line-height: 1.8;
+    }
+
+    /* Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .gallery-item {
+      aspect-ratio: 1;
+      background: rgba(0,0,0,0.3);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s, opacity 0.3s;
+      opacity: 0.8;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 60px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      margin-bottom: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--color-light);
+      text-decoration: none;
+      opacity: 0.6;
+      transition: opacity 0.3s;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+    }
+
+    .footer-copyright {
+      font-size: 12px;
+      opacity: 0.4;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--color-dark);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-family: var(--font-en);
+      font-size: 16px;
+      color: var(--color-light);
+      text-decoration: none;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .overview-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .access-content {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav {
+        padding: 16px 24px;
+      }
+
+      .nav-menu {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .hero-title {
+        font-size: 32px;
+        letter-spacing: 0.2em;
+      }
+
+      .hero-subtitle {
+        font-size: 14px;
+      }
+
+      .section {
+        padding: 80px 24px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+
+      .about-text {
+        font-size: 15px;
+      }
+
+      .timetable-item {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .timetable-time {
+        width: auto;
+      }
+
+      .footer {
+        padding: 40px 24px;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="#" class="nav-logo">感門之盟</a>
+    <div class="nav-menu">
+      <a href="index.html">Top</a>
+      <a href="program.html">Program</a>
+      <a href="classroom.html">Classroom</a>
+      <a href="info.html">Info</a>
+      <a href="edist.html">Edist</a>
+    </div>
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <a href="index.html">Top</a>
+    <a href="program.html">Program</a>
+    <a href="classroom.html">Classroom</a>
+    <a href="info.html">Info</a>
+    <a href="edist.html">Edist</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <img src="../assets/images/hero-dark.png" alt="" class="hero-bg">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-date">2026.3.20 FRI - 21 SAT</p>
+      <p class="hero-label">90回 感門之盟</p>
+      <h1 class="hero-title">読奏エディストリート</h1>
+      <p class="hero-subtitle">イシス編集学校 講座修了式</p>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="section-header">
+      <p class="section-label">About</p>
+      <h2 class="section-title">感門之盟とは</h2>
+    </div>
+    <div class="about-content">
+      <p class="about-text">
+        感門之盟(かんもんのめい)は、イシス編集学校での講座修了ごとに学びをともにしたもの同士が一同に会する集いです。師範代をはじめ師範陣も学衆も場をともにして次の編集を企てる祝祭。王義之の蘭亭の会に由来します。
+      </p>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section id="overview" class="section section-light">
+    <div class="section-header">
+      <p class="section-label">Overview</p>
+      <h2 class="section-title">イベント概要</h2>
+    </div>
+    <div class="overview-grid">
+      <div class="overview-card">
+        <div class="overview-icon">&#x1F4C5;</div>
+        <p class="overview-label">Date</p>
+        <p class="overview-value">2026年3月20日（金）<br>21日（土）</p>
+      </div>
+      <div class="overview-card">
+        <div class="overview-icon">&#x1F4CD;</div>
+        <p class="overview-label">Venue</p>
+        <p class="overview-value">豪徳寺 本楼</p>
+      </div>
+      <div class="overview-card">
+        <div class="overview-icon">&#x1F551;</div>
+        <p class="overview-label">Time</p>
+        <p class="overview-value">13:00 - 18:00</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timetable -->
+  <section id="timetable" class="section">
+    <div class="section-header">
+      <p class="section-label">Timetable</p>
+      <h2 class="section-title">タイムテーブル</h2>
+    </div>
+    <div class="timetable-container">
+      <div class="timetable-day">
+        <h3 class="timetable-day-title">Day 1 — 3.20 Fri</h3>
+        <div class="timetable-item">
+          <span class="timetable-time">13:00</span>
+          <div class="timetable-content">
+            <p class="timetable-title">開場・受付</p>
+          </div>
+        </div>
+        <div class="timetable-item">
+          <span class="timetable-time">13:30</span>
+          <div class="timetable-content">
+            <p class="timetable-title">開会</p>
+          </div>
+        </div>
+        <div class="timetable-item">
+          <span class="timetable-time">14:00</span>
+          <div class="timetable-content">
+            <p class="timetable-title">守 卒門式</p>
+            <p class="timetable-desc">[守]コース修了式</p>
+          </div>
+        </div>
+        <div class="timetable-item">
+          <span class="timetable-time">15:00</span>
+          <div class="timetable-content">
+            <p class="timetable-title">破 突破式</p>
+            <p class="timetable-desc">[破]コース修了式</p>
+          </div>
+        </div>
+        <div class="timetable-item">
+          <span class="timetable-time">16:00</span>
+          <div class="timetable-content">
+            <p class="timetable-title">離 退院式</p>
+            <p class="timetable-desc">[離]コース修了式</p>
+          </div>
+        </div>
+        <div class="timetable-item">
+          <span class="timetable-time">17:00</span>
+          <div class="timetable-content">
+            <p class="timetable-title">閉会</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timetable-day">
+        <h3 class="timetable-day-title">Day 2 — 3.21 Sat</h3>
+        <div class="timetable-item">
+          <span class="timetable-time">13:00</span>
+          <div class="timetable-content">
+            <p class="timetable-title">開場・受付</p>
+          </div>
+        </div>
+        <div class="timetable-item">
+          <span class="timetable-time">13:30</span>
+          <div class="timetable-content">
+            <p class="timetable-title">開会</p>
+          </div>
+        </div>
+        <div class="timetable-item">
+          <span class="timetable-time">14:00</span>
+          <div class="timetable-content">
+            <p class="timetable-title">花伝所 放伝式</p>
+            <p class="timetable-desc">花伝所修了式</p>
+          </div>
+        </div>
+        <div class="timetable-item">
+          <span class="timetable-time">15:00</span>
+          <div class="timetable-content">
+            <p class="timetable-title">守 冠界式</p>
+            <p class="timetable-desc">[守]コース入門式</p>
+          </div>
+        </div>
+        <div class="timetable-item">
+          <span class="timetable-time">16:00</span>
+          <div class="timetable-content">
+            <p class="timetable-title">校長校話</p>
+          </div>
+        </div>
+        <div class="timetable-item">
+          <span class="timetable-time">17:00</span>
+          <div class="timetable-content">
+            <p class="timetable-title">交流会</p>
+            <p class="timetable-desc">参加者同士の交流・歓談</p>
+          </div>
+        </div>
+        <div class="timetable-item">
+          <span class="timetable-time">18:30</span>
+          <div class="timetable-content">
+            <p class="timetable-title">閉会</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Access -->
+  <section id="access" class="section section-accent">
+    <div class="section-header">
+      <p class="section-label">Access</p>
+      <h2 class="section-title">アクセス</h2>
+    </div>
+    <div class="access-content">
+      <div class="access-map">
+        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.5);">
+          Google Maps
+        </div>
+      </div>
+      <div class="access-info">
+        <h3>豪徳寺 本楼</h3>
+        <p class="access-address">
+          〒154-0021<br>
+          東京都世田谷区豪徳寺1-22-14
+        </p>
+        <p class="access-detail">
+          小田急線「豪徳寺駅」徒歩5分<br>
+          東急世田谷線「山下駅」徒歩5分
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" class="section">
+    <div class="section-header">
+      <p class="section-label">Gallery</p>
+      <h2 class="section-title">過去開催の様子</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><div style="width:100%;height:100%;background:rgba(255,255,255,0.1);"></div></div>
+      <div class="gallery-item"><div style="width:100%;height:100%;background:rgba(255,255,255,0.1);"></div></div>
+      <div class="gallery-item"><div style="width:100%;height:100%;background:rgba(255,255,255,0.1);"></div></div>
+      <div class="gallery-item"><div style="width:100%;height:100%;background:rgba(255,255,255,0.1);"></div></div>
+      <div class="gallery-item"><div style="width:100%;height:100%;background:rgba(255,255,255,0.1);"></div></div>
+      <div class="gallery-item"><div style="width:100%;height:100%;background:rgba(255,255,255,0.1);"></div></div>
+      <div class="gallery-item"><div style="width:100%;height:100%;background:rgba(255,255,255,0.1);"></div></div>
+      <div class="gallery-item"><div style="width:100%;height:100%;background:rgba(255,255,255,0.1);"></div></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-logo">感門之盟</p>
+    <div class="footer-links">
+      <a href="#">イシス編集学校</a>
+      <a href="#">お問い合わせ</a>
+    </div>
+    <p class="footer-copyright">&copy; イシス編集学校 All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('.nav');
+      if (window.scrollY > 100) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    // Mobile menu
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>教室一覧 | 90回感門之盟</title>
+  <meta name="description" content="今期の教室一覧と師範・師範代の紹介">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-dark: #1a1a1a;
+      --color-light: #ffffff;
+      --color-gray: #888888;
+      --color-accent: #8B9F6E;
+      --color-accent-dark: #6B7F4E;
+      --font-jp: 'Noto Sans JP', sans-serif;
+      --font-en: 'Outfit', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-jp);
+      background-color: var(--color-dark);
+      color: var(--color-light);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-logo {
+      font-family: var(--font-jp);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--color-light);
+      text-decoration: none;
+      letter-spacing: 0.2em;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 40px;
+    }
+
+    .nav-menu a {
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--color-light);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+
+    .nav-menu a:hover {
+      opacity: 1;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--color-light);
+      transition: 0.3s;
+    }
+
+    /* Page Header */
+    .page-header {
+      padding: 160px 60px 80px;
+      text-align: center;
+    }
+
+    .page-label {
+      font-family: var(--font-en);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 16px;
+    }
+
+    .page-title {
+      font-size: 40px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+    }
+
+    /* Sections */
+    .section {
+      padding: 100px 60px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-label {
+      font-family: var(--font-en);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+    }
+
+    /* Course Tabs */
+    .course-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+    }
+
+    .course-tab {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 12px 28px;
+      font-family: var(--font-jp);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--color-light);
+      cursor: pointer;
+      transition: all 0.3s;
+      letter-spacing: 0.1em;
+    }
+
+    .course-tab:hover {
+      border-color: var(--color-light);
+    }
+
+    .course-tab.active {
+      background: var(--color-light);
+      color: var(--color-dark);
+      border-color: var(--color-light);
+    }
+
+    /* Course Content */
+    .course-content {
+      display: none;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .course-content.active {
+      display: block;
+    }
+
+    /* Classroom Grid */
+    .classroom-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+
+    .classroom-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+    }
+
+    .classroom-header {
+      background: var(--color-accent);
+      padding: 24px 28px;
+    }
+
+    .classroom-name {
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+    }
+
+    .classroom-body {
+      padding: 28px;
+    }
+
+    .classroom-staff {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .staff-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .staff-image {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      flex-shrink: 0;
+    }
+
+    .staff-info {
+      flex-grow: 1;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .staff-main {
+      flex-shrink: 0;
+      min-width: 100px;
+    }
+
+    .staff-role {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      opacity: 0.5;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .staff-name {
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+    }
+
+    .staff-description {
+      font-size: 13px;
+      opacity: 0.7;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 60px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      margin-bottom: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--color-light);
+      text-decoration: none;
+      opacity: 0.6;
+      transition: opacity 0.3s;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+    }
+
+    .footer-copyright {
+      font-size: 12px;
+      opacity: 0.4;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--color-dark);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-family: var(--font-en);
+      font-size: 16px;
+      color: var(--color-light);
+      text-decoration: none;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .classroom-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav {
+        padding: 16px 24px;
+      }
+
+      .nav-menu {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .page-header {
+        padding: 120px 24px 60px;
+      }
+
+      .page-title {
+        font-size: 28px;
+      }
+
+      .section {
+        padding: 60px 24px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+
+      .course-tabs {
+        gap: 10px;
+      }
+
+      .course-tab {
+        padding: 10px 20px;
+        font-size: 13px;
+      }
+
+      .staff-info {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .footer {
+        padding: 40px 24px;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">感門之盟</a>
+    <div class="nav-menu">
+      <a href="index.html">Top</a>
+      <a href="program.html">Program</a>
+      <a href="classroom.html">Classroom</a>
+      <a href="info.html">Info</a>
+      <a href="edist.html">Edist</a>
+    </div>
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <a href="index.html">Top</a>
+    <a href="program.html">Program</a>
+    <a href="classroom.html">Classroom</a>
+    <a href="info.html">Info</a>
+    <a href="edist.html">Edist</a>
+  </div>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <p class="page-label">Classroom</p>
+    <h1 class="page-title">教室一覧</h1>
+  </header>
+
+  <main>
+    <section class="section">
+      <!-- Course Tabs -->
+      <div class="course-tabs">
+        <button class="course-tab active" data-course="shu">[守]</button>
+        <button class="course-tab" data-course="monogatari">物語講座</button>
+        <button class="course-tab" data-course="ha">[破]</button>
+        <button class="course-tab" data-course="kaden">花伝所</button>
+      </div>
+
+      <!-- 守 Course -->
+      <div class="course-content active" data-course="shu">
+        <div class="section-header">
+          <p class="section-label">Shu Course</p>
+          <h2 class="section-title">[守]コース 教室一覧</h2>
+        </div>
+        <div class="classroom-grid">
+          <div class="classroom-card">
+            <div class="classroom-header">
+              <h3 class="classroom-name">○○教室</h3>
+            </div>
+            <div class="classroom-body">
+              <div class="classroom-staff">
+                <div class="staff-item">
+                  <div class="staff-image"></div>
+                  <div class="staff-info">
+                    <div class="staff-main">
+                      <p class="staff-role">師範</p>
+                      <p class="staff-name">師範名</p>
+                    </div>
+                    <p class="staff-description">テキストテキストテキスト</p>
+                  </div>
+                </div>
+                <div class="staff-item">
+                  <div class="staff-image"></div>
+                  <div class="staff-info">
+                    <div class="staff-main">
+                      <p class="staff-role">師範代</p>
+                      <p class="staff-name">師範代名</p>
+                    </div>
+                    <p class="staff-description">テキストテキストテキスト</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="classroom-card">
+            <div class="classroom-header">
+              <h3 class="classroom-name">○○教室</h3>
+            </div>
+            <div class="classroom-body">
+              <div class="classroom-staff">
+                <div class="staff-item">
+                  <div class="staff-image"></div>
+                  <div class="staff-info">
+                    <div class="staff-main">
+                      <p class="staff-role">師範</p>
+                      <p class="staff-name">師範名</p>
+                    </div>
+                    <p class="staff-description">テキストテキストテキスト</p>
+                  </div>
+                </div>
+                <div class="staff-item">
+                  <div class="staff-image"></div>
+                  <div class="staff-info">
+                    <div class="staff-main">
+                      <p class="staff-role">師範代</p>
+                      <p class="staff-name">師範代名</p>
+                    </div>
+                    <p class="staff-description">テキストテキストテキスト</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 物語講座 -->
+      <div class="course-content" data-course="monogatari">
+        <div class="section-header">
+          <p class="section-label">Monogatari Course</p>
+          <h2 class="section-title">物語講座 教室一覧</h2>
+        </div>
+        <div class="classroom-grid">
+          <div class="classroom-card">
+            <div class="classroom-header">
+              <h3 class="classroom-name">○○教室</h3>
+            </div>
+            <div class="classroom-body">
+              <div class="classroom-staff">
+                <div class="staff-item">
+                  <div class="staff-image"></div>
+                  <div class="staff-info">
+                    <div class="staff-main">
+                      <p class="staff-role">師範</p>
+                      <p class="staff-name">師範名</p>
+                    </div>
+                    <p class="staff-description">テキストテキストテキスト</p>
+                  </div>
+                </div>
+                <div class="staff-item">
+                  <div class="staff-image"></div>
+                  <div class="staff-info">
+                    <div class="staff-main">
+                      <p class="staff-role">師範代</p>
+                      <p class="staff-name">師範代名</p>
+                    </div>
+                    <p class="staff-description">テキストテキストテキスト</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 破 Course -->
+      <div class="course-content" data-course="ha">
+        <div class="section-header">
+          <p class="section-label">Ha Course</p>
+          <h2 class="section-title">[破]コース 教室一覧</h2>
+        </div>
+        <div class="classroom-grid">
+          <div class="classroom-card">
+            <div class="classroom-header">
+              <h3 class="classroom-name">○○教室</h3>
+            </div>
+            <div class="classroom-body">
+              <div class="classroom-staff">
+                <div class="staff-item">
+                  <div class="staff-image"></div>
+                  <div class="staff-info">
+                    <div class="staff-main">
+                      <p class="staff-role">師範</p>
+                      <p class="staff-name">師範名</p>
+                    </div>
+                    <p class="staff-description">テキストテキストテキスト</p>
+                  </div>
+                </div>
+                <div class="staff-item">
+                  <div class="staff-image"></div>
+                  <div class="staff-info">
+                    <div class="staff-main">
+                      <p class="staff-role">師範代</p>
+                      <p class="staff-name">師範代名</p>
+                    </div>
+                    <p class="staff-description">テキストテキストテキスト</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 花伝所 -->
+      <div class="course-content" data-course="kaden">
+        <div class="section-header">
+          <p class="section-label">Kadensho</p>
+          <h2 class="section-title">花伝所 教室一覧</h2>
+        </div>
+        <div class="classroom-grid">
+          <div class="classroom-card">
+            <div class="classroom-header">
+              <h3 class="classroom-name">むらさき道場</h3>
+            </div>
+            <div class="classroom-body">
+              <div class="classroom-staff">
+                <div class="staff-item">
+                  <div class="staff-image"></div>
+                  <div class="staff-info">
+                    <div class="staff-main">
+                      <p class="staff-role">花伝師範</p>
+                      <p class="staff-name">大濱朋子</p>
+                    </div>
+                    <p class="staff-description">テキストテキストテキスト</p>
+                  </div>
+                </div>
+                <div class="staff-item">
+                  <div class="staff-image"></div>
+                  <div class="staff-info">
+                    <div class="staff-main">
+                      <p class="staff-role">錬成師範</p>
+                      <p class="staff-name">山崎智章</p>
+                    </div>
+                    <p class="staff-description">テキストテキストテキスト</p>
+                  </div>
+                </div>
+                <div class="staff-item">
+                  <div class="staff-image"></div>
+                  <div class="staff-info">
+                    <div class="staff-main">
+                      <p class="staff-role">錬成師範</p>
+                      <p class="staff-name">齋藤成憲</p>
+                    </div>
+                    <p class="staff-description">テキストテキストテキスト</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="classroom-card">
+            <div class="classroom-header">
+              <h3 class="classroom-name">やまぶき道場</h3>
+            </div>
+            <div class="classroom-body">
+              <div class="classroom-staff">
+                <div class="staff-item">
+                  <div class="staff-image"></div>
+                  <div class="staff-info">
+                    <div class="staff-main">
+                      <p class="staff-role">花伝師範</p>
+                      <p class="staff-name">古谷奈々</p>
+                    </div>
+                    <p class="staff-description">テキストテキストテキスト</p>
+                  </div>
+                </div>
+                <div class="staff-item">
+                  <div class="staff-image"></div>
+                  <div class="staff-info">
+                    <div class="staff-main">
+                      <p class="staff-role">錬成師範</p>
+                      <p class="staff-name">角山祥道</p>
+                    </div>
+                    <p class="staff-description">テキストテキストテキスト</p>
+                  </div>
+                </div>
+                <div class="staff-item">
+                  <div class="staff-image"></div>
+                  <div class="staff-info">
+                    <div class="staff-main">
+                      <p class="staff-role">錬成師範</p>
+                      <p class="staff-name">上原悦子</p>
+                    </div>
+                    <p class="staff-description">テキストテキストテキスト</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-logo">感門之盟</p>
+    <div class="footer-links">
+      <a href="#">イシス編集学校</a>
+      <a href="#">お問い合わせ</a>
+    </div>
+    <p class="footer-copyright">&copy; イシス編集学校 All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Course tabs
+    document.querySelectorAll('.course-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const course = tab.dataset.course;
+
+        document.querySelectorAll('.course-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        document.querySelectorAll('.course-content').forEach(c => {
+          c.classList.toggle('active', c.dataset.course === course);
+        });
+      });
+    });
+
+    // Mobile menu
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>
