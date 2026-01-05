@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>エディスト記事 | 90回感門之盟</title>
+  <meta name="description" content="感門之盟に関するエディスト記事一覧">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-dark: #1a1a1a;
+      --color-light: #ffffff;
+      --color-gray: #888888;
+      --color-accent: #8B9F6E;
+      --color-accent-dark: #6B7F4E;
+      --font-jp: 'Noto Sans JP', sans-serif;
+      --font-en: 'Outfit', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-jp);
+      background-color: var(--color-dark);
+      color: var(--color-light);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-logo {
+      font-family: var(--font-jp);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--color-light);
+      text-decoration: none;
+      letter-spacing: 0.2em;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 40px;
+    }
+
+    .nav-menu a {
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--color-light);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+      opacity: 1;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--color-light);
+      transition: 0.3s;
+    }
+
+    /* Page Header */
+    .page-header {
+      padding: 160px 60px 80px;
+      text-align: center;
+    }
+
+    .page-label {
+      font-family: var(--font-en);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 16px;
+    }
+
+    .page-title {
+      font-size: 40px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      margin-bottom: 24px;
+    }
+
+    .page-desc {
+      font-size: 15px;
+      opacity: 0.7;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Sections */
+    .section {
+      padding: 80px 60px;
+    }
+
+    .section-header {
+      margin-bottom: 48px;
+    }
+
+    .section-label {
+      font-family: var(--font-en);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+    }
+
+    /* Article Grid */
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .article-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+      transition: all 0.3s;
+      text-decoration: none;
+      color: var(--color-light);
+      display: block;
+    }
+
+    .article-card:visited,
+    .article-card:link {
+      color: var(--color-light);
+    }
+
+    .article-card:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: var(--color-accent);
+      transform: translateY(-4px);
+    }
+
+    .article-image {
+      aspect-ratio: 16/9;
+      background: rgba(255,255,255,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .article-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .article-card:hover .article-image img {
+      transform: scale(1.05);
+    }
+
+    .article-category {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-family: var(--font-en);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--color-accent);
+      color: var(--color-light);
+      padding: 4px 12px;
+    }
+
+    .article-content {
+      padding: 24px;
+    }
+
+    .article-date {
+      font-family: var(--font-en);
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 12px;
+    }
+
+    .article-title {
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      line-height: 1.6;
+      margin-bottom: 12px;
+      color: var(--color-light);
+    }
+
+    .article-excerpt {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.8;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .article-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-en);
+      font-size: 12px;
+      color: var(--color-accent);
+      margin-top: 16px;
+      letter-spacing: 0.1em;
+    }
+
+    .article-link::after {
+      content: '→';
+      transition: transform 0.3s;
+    }
+
+    .article-card:hover .article-link::after {
+      transform: translateX(4px);
+    }
+
+    /* Featured Article */
+    .featured-article {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      max-width: 1200px;
+      margin: 0 auto 80px;
+      padding: 48px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      text-decoration: none;
+      color: var(--color-light);
+    }
+
+    .featured-article:visited,
+    .featured-article:link {
+      color: var(--color-light);
+    }
+
+    .featured-image {
+      aspect-ratio: 16/10;
+      background: rgba(255,255,255,0.05);
+      overflow: hidden;
+    }
+
+    .featured-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .featured-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .featured-label {
+      font-family: var(--font-en);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 16px;
+    }
+
+    .featured-title {
+      font-size: 28px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      color: var(--color-light);
+    }
+
+    .featured-excerpt {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      line-height: 2;
+      margin-bottom: 32px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--color-accent);
+      color: var(--color-light);
+      padding: 14px 32px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      transition: all 0.3s;
+    }
+
+    .btn:hover {
+      background: var(--color-accent-dark);
+    }
+
+    /* External Link Notice */
+    .external-notice {
+      text-align: center;
+      padding: 40px;
+      background: rgba(139, 159, 110, 0.1);
+      border: 1px solid rgba(139, 159, 110, 0.3);
+      max-width: 800px;
+      margin: 60px auto 0;
+    }
+
+    .external-notice p {
+      font-size: 14px;
+      opacity: 0.8;
+      margin-bottom: 20px;
+    }
+
+    .external-notice a {
+      color: var(--color-accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .external-notice a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 60px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      margin-bottom: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--color-light);
+      text-decoration: none;
+      opacity: 0.6;
+      transition: opacity 0.3s;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+    }
+
+    .footer-copyright {
+      font-size: 12px;
+      opacity: 0.4;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--color-dark);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-family: var(--font-en);
+      font-size: 16px;
+      color: var(--color-light);
+      text-decoration: none;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .article-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .featured-article {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav {
+        padding: 16px 24px;
+      }
+
+      .nav-menu {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .page-header {
+        padding: 120px 24px 60px;
+      }
+
+      .page-title {
+        font-size: 28px;
+      }
+
+      .section {
+        padding: 60px 24px;
+      }
+
+      .article-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-article {
+        padding: 24px;
+      }
+
+      .featured-title {
+        font-size: 22px;
+      }
+
+      .footer {
+        padding: 40px 24px;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">感門之盟</a>
+    <div class="nav-menu">
+      <a href="index.html">Top</a>
+      <a href="program.html">Program</a>
+      <a href="classroom.html">Classroom</a>
+      <a href="info.html">Info</a>
+      <a href="edist.html" class="active">Edist</a>
+    </div>
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <a href="index.html">Top</a>
+    <a href="program.html">Program</a>
+    <a href="classroom.html">Classroom</a>
+    <a href="info.html">Info</a>
+    <a href="edist.html">Edist</a>
+  </div>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <p class="page-label">Edist Articles</p>
+    <h1 class="page-title">エディスト記事</h1>
+    <p class="page-desc">感門之盟に関連するエディストの記事をご紹介します。過去の感門之盟レポートや、登壇者インタビューなどをお読みいただけます。</p>
+  </header>
+
+  <main>
+    <!-- Featured Article -->
+    <section class="section">
+      <a href="https://edist.ne.jp/dust/89kanmon_nomikurabema/" target="_blank" rel="noopener" class="featured-article">
+        <div class="featured-image">
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.3);">
+            Article Image
+          </div>
+        </div>
+        <div class="featured-content">
+          <p class="featured-label">Featured</p>
+          <h2 class="featured-title">89感門 総合司会は呑み比べ魔・青井隼人</h2>
+          <p class="featured-excerpt">第89回感門之盟の総合司会を務める青井隼人師範へのインタビュー。言語学専門家として、多良間島の沖縄方言研究に従事する青井師範の「聞き比べ」の探求姿勢と、感門之盟への独自の視点を語る。</p>
+          <span class="btn">記事を読む</span>
+        </div>
+      </a>
+
+      <div class="section-header">
+        <p class="section-label">Related Articles</p>
+        <h2 class="section-title">関連記事</h2>
+      </div>
+
+      <div class="article-grid">
+        <a href="https://edist.ne.jp/" target="_blank" rel="noopener" class="article-card">
+          <div class="article-image">
+            <span class="article-category">DUST</span>
+            <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.2);">
+              Image
+            </div>
+          </div>
+          <div class="article-content">
+            <p class="article-date">2025.XX.XX</p>
+            <h3 class="article-title">感門之盟レポート記事タイトル</h3>
+            <p class="article-excerpt">記事の概要テキストが入ります。記事の概要テキストが入ります。</p>
+            <span class="article-link">Read More</span>
+          </div>
+        </a>
+
+        <a href="https://edist.ne.jp/" target="_blank" rel="noopener" class="article-card">
+          <div class="article-image">
+            <span class="article-category">CAST</span>
+            <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.2);">
+              Image
+            </div>
+          </div>
+          <div class="article-content">
+            <p class="article-date">2025.XX.XX</p>
+            <h3 class="article-title">登壇者インタビュー記事</h3>
+            <p class="article-excerpt">記事の概要テキストが入ります。記事の概要テキストが入ります。</p>
+            <span class="article-link">Read More</span>
+          </div>
+        </a>
+
+        <a href="https://edist.ne.jp/" target="_blank" rel="noopener" class="article-card">
+          <div class="article-image">
+            <span class="article-category">NEST</span>
+            <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.2);">
+              Image
+            </div>
+          </div>
+          <div class="article-content">
+            <p class="article-date">2025.XX.XX</p>
+            <h3 class="article-title">教室レポート記事</h3>
+            <p class="article-excerpt">記事の概要テキストが入ります。記事の概要テキストが入ります。</p>
+            <span class="article-link">Read More</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="external-notice">
+        <p>その他の感門之盟関連記事は、遊刊エディストでご覧いただけます。</p>
+        <a href="https://edist.ne.jp/" target="_blank" rel="noopener">遊刊エディスト →</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-logo">感門之盟</p>
+    <div class="footer-links">
+      <a href="https://es.isis.ne.jp/" target="_blank">イシス編集学校</a>
+      <a href="https://edist.ne.jp/" target="_blank">エディスト</a>
+      <a href="#">お問い合わせ</a>
+    </div>
+    <p class="footer-copyright">&copy; イシス編集学校 All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Mobile menu
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>

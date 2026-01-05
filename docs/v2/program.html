@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>プログラム | 90回感門之盟</title>
+  <meta name="description" content="感門之盟のタイムテーブル・登壇者紹介">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-dark: #1a1a1a;
+      --color-light: #ffffff;
+      --color-gray: #888888;
+      --color-accent: #8B9F6E;
+      --color-accent-dark: #6B7F4E;
+      --font-jp: 'Noto Sans JP', sans-serif;
+      --font-en: 'Outfit', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-jp);
+      background-color: var(--color-dark);
+      color: var(--color-light);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-logo {
+      font-family: var(--font-jp);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--color-light);
+      text-decoration: none;
+      letter-spacing: 0.2em;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 40px;
+    }
+
+    .nav-menu a {
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--color-light);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+
+    .nav-menu a:hover {
+      opacity: 1;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--color-light);
+      transition: 0.3s;
+    }
+
+    /* Page Header */
+    .page-header {
+      padding: 160px 60px 80px;
+      text-align: center;
+    }
+
+    .page-label {
+      font-family: var(--font-en);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 16px;
+    }
+
+    .page-title {
+      font-size: 40px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+    }
+
+    /* Sections */
+    .section {
+      padding: 100px 60px;
+    }
+
+    .section-light {
+      background: var(--color-light);
+      color: var(--color-dark);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-label {
+      font-family: var(--font-en);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 32px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+    }
+
+    /* Timetable */
+    .timetable-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .timetable-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .timetable-tab {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 12px 32px;
+      font-family: var(--font-en);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--color-light);
+      cursor: pointer;
+      transition: all 0.3s;
+      letter-spacing: 0.1em;
+    }
+
+    .timetable-tab:hover {
+      border-color: var(--color-light);
+    }
+
+    .timetable-tab.active {
+      background: var(--color-light);
+      color: var(--color-dark);
+      border-color: var(--color-light);
+    }
+
+    .timetable-day {
+      display: none;
+    }
+
+    .timetable-day.active {
+      display: block;
+    }
+
+    .timetable-day-title {
+      font-family: var(--font-en);
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .timetable-item {
+      display: flex;
+      gap: 40px;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .timetable-time {
+      font-family: var(--font-en);
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      opacity: 0.6;
+      flex-shrink: 0;
+      width: 80px;
+    }
+
+    .timetable-content {
+      flex-grow: 1;
+    }
+
+    .timetable-title {
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+
+    .timetable-desc {
+      font-size: 13px;
+      opacity: 0.6;
+    }
+
+    /* Speakers */
+    .speakers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .speaker-card {
+      text-align: center;
+    }
+
+    .speaker-image {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.2);
+      margin: 0 auto 24px;
+    }
+
+    .speaker-name {
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .speaker-role {
+      font-size: 13px;
+      opacity: 0.6;
+      margin-bottom: 16px;
+    }
+
+    .speaker-description {
+      font-size: 14px;
+      line-height: 1.8;
+      opacity: 0.8;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 60px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      margin-bottom: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--color-light);
+      text-decoration: none;
+      opacity: 0.6;
+      transition: opacity 0.3s;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+    }
+
+    .footer-copyright {
+      font-size: 12px;
+      opacity: 0.4;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--color-dark);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-family: var(--font-en);
+      font-size: 16px;
+      color: var(--color-light);
+      text-decoration: none;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .speakers-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav {
+        padding: 16px 24px;
+      }
+
+      .nav-menu {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .page-header {
+        padding: 120px 24px 60px;
+      }
+
+      .page-title {
+        font-size: 28px;
+      }
+
+      .section {
+        padding: 60px 24px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+
+      .timetable-tabs {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .timetable-item {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .timetable-time {
+        width: auto;
+      }
+
+      .speakers-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer {
+        padding: 40px 24px;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">感門之盟</a>
+    <div class="nav-menu">
+      <a href="index.html">Top</a>
+      <a href="program.html">Program</a>
+      <a href="classroom.html">Classroom</a>
+      <a href="info.html">Info</a>
+      <a href="edist.html">Edist</a>
+    </div>
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <a href="index.html">Top</a>
+    <a href="program.html">Program</a>
+    <a href="classroom.html">Classroom</a>
+    <a href="info.html">Info</a>
+    <a href="edist.html">Edist</a>
+  </div>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <p class="page-label">Program</p>
+    <h1 class="page-title">プログラム</h1>
+  </header>
+
+  <main>
+    <!-- Timetable -->
+    <section class="section">
+      <div class="section-header">
+        <p class="section-label">Timetable</p>
+        <h2 class="section-title">タイムテーブル</h2>
+      </div>
+
+      <div class="timetable-container">
+        <div class="timetable-tabs">
+          <button class="timetable-tab active" data-day="1">Day 1 — 3.20 Fri</button>
+          <button class="timetable-tab" data-day="2">Day 2 — 3.21 Sat</button>
+        </div>
+
+        <div class="timetable-day active" data-day="1">
+          <h3 class="timetable-day-title">Day 1 — 3.20 Fri</h3>
+          <div class="timetable-item">
+            <span class="timetable-time">13:00</span>
+            <div class="timetable-content">
+              <p class="timetable-title">開場・受付</p>
+            </div>
+          </div>
+          <div class="timetable-item">
+            <span class="timetable-time">13:30</span>
+            <div class="timetable-content">
+              <p class="timetable-title">開会</p>
+            </div>
+          </div>
+          <div class="timetable-item">
+            <span class="timetable-time">14:00</span>
+            <div class="timetable-content">
+              <p class="timetable-title">守 卒門式</p>
+              <p class="timetable-desc">[守]コース修了式</p>
+            </div>
+          </div>
+          <div class="timetable-item">
+            <span class="timetable-time">15:00</span>
+            <div class="timetable-content">
+              <p class="timetable-title">破 突破式</p>
+              <p class="timetable-desc">[破]コース修了式</p>
+            </div>
+          </div>
+          <div class="timetable-item">
+            <span class="timetable-time">16:00</span>
+            <div class="timetable-content">
+              <p class="timetable-title">離 退院式</p>
+              <p class="timetable-desc">[離]コース修了式</p>
+            </div>
+          </div>
+          <div class="timetable-item">
+            <span class="timetable-time">17:00</span>
+            <div class="timetable-content">
+              <p class="timetable-title">閉会</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="timetable-day" data-day="2">
+          <h3 class="timetable-day-title">Day 2 — 3.21 Sat</h3>
+          <div class="timetable-item">
+            <span class="timetable-time">13:00</span>
+            <div class="timetable-content">
+              <p class="timetable-title">開場・受付</p>
+            </div>
+          </div>
+          <div class="timetable-item">
+            <span class="timetable-time">13:30</span>
+            <div class="timetable-content">
+              <p class="timetable-title">開会</p>
+            </div>
+          </div>
+          <div class="timetable-item">
+            <span class="timetable-time">14:00</span>
+            <div class="timetable-content">
+              <p class="timetable-title">花伝所 放伝式</p>
+              <p class="timetable-desc">花伝所修了式</p>
+            </div>
+          </div>
+          <div class="timetable-item">
+            <span class="timetable-time">15:00</span>
+            <div class="timetable-content">
+              <p class="timetable-title">守 冠界式</p>
+              <p class="timetable-desc">[守]コース入門式</p>
+            </div>
+          </div>
+          <div class="timetable-item">
+            <span class="timetable-time">16:00</span>
+            <div class="timetable-content">
+              <p class="timetable-title">校長校話</p>
+            </div>
+          </div>
+          <div class="timetable-item">
+            <span class="timetable-time">17:00</span>
+            <div class="timetable-content">
+              <p class="timetable-title">交流会</p>
+              <p class="timetable-desc">参加者同士の交流・歓談</p>
+            </div>
+          </div>
+          <div class="timetable-item">
+            <span class="timetable-time">18:30</span>
+            <div class="timetable-content">
+              <p class="timetable-title">閉会</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Speakers -->
+    <section class="section section-light">
+      <div class="section-header">
+        <p class="section-label">Speakers</p>
+        <h2 class="section-title">登壇者紹介</h2>
+      </div>
+      <div class="speakers-grid">
+        <div class="speaker-card">
+          <div class="speaker-image"></div>
+          <h3 class="speaker-name">登壇者名</h3>
+          <p class="speaker-role">役職・肩書き</p>
+          <p class="speaker-description">登壇者の紹介文が入ります。</p>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-image"></div>
+          <h3 class="speaker-name">登壇者名</h3>
+          <p class="speaker-role">役職・肩書き</p>
+          <p class="speaker-description">登壇者の紹介文が入ります。</p>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-image"></div>
+          <h3 class="speaker-name">登壇者名</h3>
+          <p class="speaker-role">役職・肩書き</p>
+          <p class="speaker-description">登壇者の紹介文が入ります。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-logo">感門之盟</p>
+    <div class="footer-links">
+      <a href="#">イシス編集学校</a>
+      <a href="#">お問い合わせ</a>
+    </div>
+    <p class="footer-copyright">&copy; イシス編集学校 All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Timetable tabs
+    document.querySelectorAll('.timetable-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const day = tab.dataset.day;
+
+        document.querySelectorAll('.timetable-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        document.querySelectorAll('.timetable-day').forEach(d => {
+          d.classList.toggle('active', d.dataset.day === day);
+        });
+      });
+    });
+
+    // Mobile menu
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>

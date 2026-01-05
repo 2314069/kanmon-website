@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>教室一覧 | 90回感門之盟</title>
+  <meta name="description" content="感門之盟の教室一覧・師範代紹介">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-bg: #F5F0E8;
+      --color-bg-dark: #E8E0D0;
+      --color-text: #2C2C2C;
+      --color-text-light: #666666;
+      --color-accent: #C84B31;
+      --color-accent-dark: #A33D28;
+      --color-white: #FFFFFF;
+      --font-jp: 'Noto Serif JP', serif;
+      --font-en: 'Outfit', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-jp);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.8;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(245, 240, 232, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+    }
+
+    .nav-logo {
+      font-family: var(--font-jp);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--color-text);
+      text-decoration: none;
+      letter-spacing: 0.15em;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-menu a {
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--color-accent);
+      transition: width 0.3s;
+    }
+
+    .nav-menu a:hover::after,
+    .nav-menu a.active::after {
+      width: 100%;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: var(--color-text);
+      transition: 0.3s;
+    }
+
+    /* Page Header */
+    .page-header {
+      padding: 160px 60px 80px;
+      text-align: center;
+      background: var(--color-white);
+    }
+
+    .page-label {
+      font-family: var(--font-en);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 16px;
+    }
+
+    .page-title {
+      font-size: 40px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+    }
+
+    /* Sections */
+    .section {
+      padding: 100px 60px;
+    }
+
+    .section-white {
+      background: var(--color-white);
+    }
+
+    /* Course Tabs */
+    .course-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+    }
+
+    .course-tab {
+      padding: 14px 32px;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      background: transparent;
+      border: 2px solid var(--color-text);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .course-tab.active,
+    .course-tab:hover {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      color: var(--color-white);
+    }
+
+    .course-content {
+      display: none;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .course-content.active {
+      display: block;
+    }
+
+    /* Classroom Grid */
+    .classroom-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .classroom-card {
+      background: var(--color-white);
+      padding: 40px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .classroom-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.08);
+    }
+
+    .classroom-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--color-accent);
+    }
+
+    .classroom-name {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+
+    .classroom-badge {
+      font-family: var(--font-en);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      padding: 6px 16px;
+      background: var(--color-bg);
+      color: var(--color-text-light);
+    }
+
+    /* Staff Grid */
+    .staff-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .staff-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .staff-image {
+      width: 64px;
+      height: 64px;
+      background: var(--color-bg-dark);
+      flex-shrink: 0;
+    }
+
+    .staff-main {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 100px;
+    }
+
+    .staff-role {
+      font-family: var(--font-en);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+    }
+
+    .staff-name {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .staff-desc {
+      flex: 1;
+      font-size: 13px;
+      color: var(--color-text-light);
+      line-height: 1.7;
+    }
+
+    /* Dojo Section */
+    .dojo-section {
+      margin-bottom: 32px;
+    }
+
+    .dojo-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .dojo-title {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--color-bg-dark);
+    }
+
+    /* Footer */
+    .footer {
+      padding: 60px;
+      text-align: center;
+      background: var(--color-bg-dark);
+    }
+
+    .footer-logo {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      margin-bottom: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--color-text);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+    }
+
+    .footer-copyright {
+      font-size: 12px;
+      color: var(--color-text-light);
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--color-bg);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-family: var(--font-en);
+      font-size: 18px;
+      color: var(--color-text);
+      text-decoration: none;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .classroom-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav {
+        padding: 16px 24px;
+      }
+
+      .nav-menu {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .page-header {
+        padding: 120px 24px 60px;
+      }
+
+      .page-title {
+        font-size: 28px;
+      }
+
+      .section {
+        padding: 60px 24px;
+      }
+
+      .course-tabs {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .classroom-card {
+        padding: 24px;
+      }
+
+      .staff-item {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .footer {
+        padding: 40px 24px;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">感門之盟</a>
+    <div class="nav-menu">
+      <a href="index.html">Top</a>
+      <a href="program.html">Program</a>
+      <a href="classroom.html" class="active">Classroom</a>
+      <a href="info.html">Info</a>
+      <a href="edist.html">Edist</a>
+    </div>
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <a href="index.html">Top</a>
+    <a href="program.html">Program</a>
+    <a href="classroom.html">Classroom</a>
+    <a href="info.html">Info</a>
+    <a href="edist.html">Edist</a>
+  </div>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <p class="page-label">Classroom</p>
+    <h1 class="page-title">教室一覧</h1>
+  </header>
+
+  <main>
+    <section class="section">
+      <!-- Course Tabs -->
+      <div class="course-tabs">
+        <button class="course-tab active" data-course="mamoru">守</button>
+        <button class="course-tab" data-course="monogatari">物語講座</button>
+        <button class="course-tab" data-course="ha">破</button>
+        <button class="course-tab" data-course="kaden">花伝所</button>
+      </div>
+
+      <!-- 守 -->
+      <div class="course-content active" data-course="mamoru">
+        <div class="classroom-grid">
+          <div class="classroom-card">
+            <div class="classroom-header">
+              <h3 class="classroom-name">○○教室</h3>
+              <span class="classroom-badge">55守</span>
+            </div>
+            <div class="staff-grid">
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">師範</span>
+                  <span class="staff-name">プレースホルダー</span>
+                </div>
+                <p class="staff-desc">テキストテキストテキスト</p>
+              </div>
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">プレースホルダー</span>
+                </div>
+                <p class="staff-desc">テキストテキストテキスト</p>
+              </div>
+            </div>
+          </div>
+          <div class="classroom-card">
+            <div class="classroom-header">
+              <h3 class="classroom-name">○○教室</h3>
+              <span class="classroom-badge">55守</span>
+            </div>
+            <div class="staff-grid">
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">師範</span>
+                  <span class="staff-name">プレースホルダー</span>
+                </div>
+                <p class="staff-desc">テキストテキストテキスト</p>
+              </div>
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">プレースホルダー</span>
+                </div>
+                <p class="staff-desc">テキストテキストテキスト</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 物語講座 -->
+      <div class="course-content" data-course="monogatari">
+        <div class="classroom-grid">
+          <div class="classroom-card">
+            <div class="classroom-header">
+              <h3 class="classroom-name">○○教室</h3>
+              <span class="classroom-badge">物語講座</span>
+            </div>
+            <div class="staff-grid">
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">師範</span>
+                  <span class="staff-name">プレースホルダー</span>
+                </div>
+                <p class="staff-desc">テキストテキストテキスト</p>
+              </div>
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">プレースホルダー</span>
+                </div>
+                <p class="staff-desc">テキストテキストテキスト</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 破 -->
+      <div class="course-content" data-course="ha">
+        <div class="classroom-grid">
+          <div class="classroom-card">
+            <div class="classroom-header">
+              <h3 class="classroom-name">○○教室</h3>
+              <span class="classroom-badge">43破</span>
+            </div>
+            <div class="staff-grid">
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">師範</span>
+                  <span class="staff-name">プレースホルダー</span>
+                </div>
+                <p class="staff-desc">テキストテキストテキスト</p>
+              </div>
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">プレースホルダー</span>
+                </div>
+                <p class="staff-desc">テキストテキストテキスト</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 花伝所 -->
+      <div class="course-content" data-course="kaden">
+        <div class="classroom-grid">
+          <div class="classroom-card">
+            <div class="classroom-header">
+              <h3 class="classroom-name">むらさき道場</h3>
+              <span class="classroom-badge">花伝所</span>
+            </div>
+            <div class="staff-grid">
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">花伝師範</span>
+                  <span class="staff-name">大濱 朋子</span>
+                </div>
+                <p class="staff-desc">テキストテキストテキスト</p>
+              </div>
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">錬成師範</span>
+                  <span class="staff-name">山崎 智章</span>
+                </div>
+                <p class="staff-desc">テキストテキストテキスト</p>
+              </div>
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">錬成師範</span>
+                  <span class="staff-name">齋藤 成憲</span>
+                </div>
+                <p class="staff-desc">テキストテキストテキスト</p>
+              </div>
+            </div>
+          </div>
+          <div class="classroom-card">
+            <div class="classroom-header">
+              <h3 class="classroom-name">やまぶき道場</h3>
+              <span class="classroom-badge">花伝所</span>
+            </div>
+            <div class="staff-grid">
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">花伝師範</span>
+                  <span class="staff-name">古谷 奈々</span>
+                </div>
+                <p class="staff-desc">テキストテキストテキスト</p>
+              </div>
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">錬成師範</span>
+                  <span class="staff-name">角山 祥道</span>
+                </div>
+                <p class="staff-desc">テキストテキストテキスト</p>
+              </div>
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">錬成師範</span>
+                  <span class="staff-name">上原 悦子</span>
+                </div>
+                <p class="staff-desc">テキストテキストテキスト</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-logo">感門之盟</p>
+    <div class="footer-links">
+      <a href="#">イシス編集学校</a>
+      <a href="#">エディスト</a>
+      <a href="#">お問い合わせ</a>
+    </div>
+    <p class="footer-copyright">&copy; イシス編集学校 All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Mobile menu
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
+    });
+
+    // Course tabs
+    const courseTabs = document.querySelectorAll('.course-tab');
+    const courseContents = document.querySelectorAll('.course-content');
+
+    courseTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const course = tab.dataset.course;
+
+        courseTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        courseContents.forEach(c => {
+          c.classList.remove('active');
+          if (c.dataset.course === course) {
+            c.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -19,7 +19,11 @@
       "Bash(copy:*)",
       "WebFetch(domain:www.beams.co.jp)",
       "WebFetch(domain:lp.webdesignclip.com)",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "Bash(tree:*)",
+      "Bash(find:*)",
+      "Bash(cat:*)",
+      "Bash(git -C /Users/asato/Library/CloudStorage/OneDrive-個人用/FOLDER/04_Dev/dev_kanmon-website log --oneline)"
     ]
   }
 }
