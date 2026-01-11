@@ -4,431 +4,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>プログラム | 90回感門之盟</title>
-  <meta name="description" content="感門之盟のタイムテーブル・登壇者紹介">
+  <meta name="description" content="感門之盟のタイムテーブル・登壇者紹介。2026年3月20日・21日開催。">
+
+  <!-- OGP -->
+  <meta property="og:title" content="プログラム | 90回感門之盟">
+  <meta property="og:description" content="感門之盟のタイムテーブル・登壇者紹介。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://example.com/program.html">
+  <meta property="og:image" content="https://example.com/assets/images/ogp.png">
+  <meta property="og:site_name" content="感門之盟">
+  <meta property="og:locale" content="ja_JP">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="プログラム | 90回感門之盟">
+  <meta name="twitter:description" content="感門之盟のタイムテーブル・登壇者紹介。">
+  <meta name="twitter:image" content="https://example.com/assets/images/ogp.png">
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/images/favicon.ico" sizes="any">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
 
-    :root {
-      --color-bg: #F5F0E8;
-      --color-bg-dark: #E8E0D0;
-      --color-text: #2C2C2C;
-      --color-text-light: #666666;
-      --color-accent: #C84B31;
-      --color-accent-dark: #A33D28;
-      --color-white: #FFFFFF;
-      --font-jp: 'Noto Serif JP', serif;
-      --font-en: 'Outfit', sans-serif;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: var(--font-jp);
-      background-color: var(--color-bg);
-      color: var(--color-text);
-      line-height: 1.8;
-    }
-
-    /* Navigation */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      padding: 16px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(245, 240, 232, 0.95);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 20px rgba(0,0,0,0.05);
-    }
-
-    .nav-logo {
-      font-family: var(--font-jp);
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--color-text);
-      text-decoration: none;
-      letter-spacing: 0.15em;
-    }
-
-    .nav-menu {
-      display: flex;
-      gap: 32px;
-    }
-
-    .nav-menu a {
-      font-family: var(--font-en);
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--color-text);
-      text-decoration: none;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      position: relative;
-      padding-bottom: 4px;
-    }
-
-    .nav-menu a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--color-accent);
-      transition: width 0.3s;
-    }
-
-    .nav-menu a:hover::after,
-    .nav-menu a.active::after {
-      width: 100%;
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 6px;
-      cursor: pointer;
-      padding: 5px;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 28px;
-      height: 2px;
-      background: var(--color-text);
-      transition: 0.3s;
-    }
-
-    /* Page Header */
-    .page-header {
-      padding: 160px 60px 80px;
-      text-align: center;
-      background: var(--color-white);
-    }
-
-    .page-label {
-      font-family: var(--font-en);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--color-accent);
-      margin-bottom: 16px;
-    }
-
-    .page-title {
-      font-size: 40px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-    }
-
-    /* Sections */
-    .section {
-      padding: 100px 60px;
-    }
-
-    .section-white {
-      background: var(--color-white);
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .section-label {
-      font-family: var(--font-en);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--color-accent);
-      margin-bottom: 16px;
-    }
-
-    .section-title {
-      font-size: 32px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-    }
-
-    /* Timetable */
-    .timetable-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 60px;
-    }
-
-    .timetable-tab {
-      padding: 16px 48px;
-      font-family: var(--font-en);
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      background: transparent;
-      border: 2px solid var(--color-text);
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .timetable-tab.active,
-    .timetable-tab:hover {
-      background: var(--color-accent);
-      border-color: var(--color-accent);
-      color: var(--color-white);
-    }
-
-    .timetable-content {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .timetable-day {
-      display: none;
-    }
-
-    .timetable-day.active {
-      display: block;
-    }
-
-    .timetable-item {
-      display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 40px;
-      padding: 40px 0;
-      border-bottom: 1px solid var(--color-bg-dark);
-    }
-
-    .timetable-item:last-child {
-      border-bottom: none;
-    }
-
-    .timetable-time {
-      font-family: var(--font-en);
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      color: var(--color-accent);
-    }
-
-    .timetable-info h4 {
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      margin-bottom: 12px;
-    }
-
-    .timetable-info p {
-      font-size: 15px;
-      color: var(--color-text-light);
-      line-height: 1.8;
-    }
-
-    /* Speakers */
-    .speakers-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .speaker-card {
-      background: var(--color-white);
-      overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .speaker-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    }
-
-    .speaker-image {
-      aspect-ratio: 1;
-      background: var(--color-bg-dark);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .speaker-image::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: var(--color-accent);
-    }
-
-    .speaker-info {
-      padding: 24px;
-    }
-
-    .speaker-role {
-      font-family: var(--font-en);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--color-accent);
-      margin-bottom: 8px;
-    }
-
-    .speaker-name {
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      margin-bottom: 12px;
-    }
-
-    .speaker-desc {
-      font-size: 13px;
-      color: var(--color-text-light);
-      line-height: 1.8;
-    }
-
-    /* Footer */
-    .footer {
-      padding: 60px;
-      text-align: center;
-      background: var(--color-bg-dark);
-    }
-
-    .footer-logo {
-      font-size: 24px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      margin-bottom: 24px;
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 32px;
-      margin-bottom: 32px;
-    }
-
-    .footer-links a {
-      font-size: 13px;
-      color: var(--color-text);
-      text-decoration: none;
-      opacity: 0.7;
-      transition: opacity 0.3s;
-    }
-
-    .footer-links a:hover {
-      opacity: 1;
-    }
-
-    .footer-copyright {
-      font-size: 12px;
-      color: var(--color-text-light);
-    }
-
-    /* Mobile Menu */
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--color-bg);
-      z-index: 999;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
-    }
-
-    .mobile-menu.active {
-      display: flex;
-    }
-
-    .mobile-menu a {
-      font-family: var(--font-en);
-      font-size: 18px;
-      color: var(--color-text);
-      text-decoration: none;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      .speakers-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .nav {
-        padding: 16px 24px;
-      }
-
-      .nav-menu {
-        display: none;
-      }
-
-      .hamburger {
-        display: flex;
-      }
-
-      .page-header {
-        padding: 120px 24px 60px;
-      }
-
-      .page-title {
-        font-size: 28px;
-      }
-
-      .section {
-        padding: 60px 24px;
-      }
-
-      .timetable-tabs {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .timetable-item {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-
-      .speakers-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer {
-        padding: 40px 24px;
-      }
-
-      .footer-links {
-        flex-direction: column;
-        gap: 16px;
-      }
-    }
-  </style>
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <!-- Navigation -->
-  <nav class="nav">
+  <nav class="nav nav-solid" role="navigation" aria-label="メインナビゲーション">
     <a href="index.html" class="nav-logo">感門之盟</a>
     <div class="nav-menu">
       <a href="index.html">Top</a>
@@ -437,15 +45,16 @@
       <a href="info.html">Info</a>
       <a href="edist.html">Edist</a>
     </div>
-    <div class="hamburger">
+    <button class="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
       <span></span>
       <span></span>
       <span></span>
-    </div>
+    </button>
   </nav>
 
   <!-- Mobile Menu -->
-  <div class="mobile-menu">
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="モバイルメニュー">
+    <button class="mobile-menu-close" aria-label="メニューを閉じる">&times;</button>
     <a href="index.html">Top</a>
     <a href="program.html">Program</a>
     <a href="classroom.html">Classroom</a>
@@ -461,19 +70,19 @@
 
   <main>
     <!-- Timetable -->
-    <section class="section section-white">
+    <section class="section section-white fade-in">
       <div class="section-header">
         <p class="section-label">Timetable</p>
         <h2 class="section-title">タイムテーブル</h2>
       </div>
 
-      <div class="timetable-tabs">
-        <button class="timetable-tab active" data-day="1">Day 1 - 3.20 Fri</button>
-        <button class="timetable-tab" data-day="2">Day 2 - 3.21 Sat</button>
+      <div class="timetable-tabs" role="tablist" aria-label="日程選択">
+        <button class="timetable-tab active" data-day="1" role="tab" aria-selected="true" aria-controls="day1">Day 1 - 3.20 Fri</button>
+        <button class="timetable-tab" data-day="2" role="tab" aria-selected="false" aria-controls="day2">Day 2 - 3.21 Sat</button>
       </div>
 
       <div class="timetable-content">
-        <div class="timetable-day active" data-day="1">
+        <div class="timetable-day active" data-day="1" id="day1" role="tabpanel">
           <div class="timetable-item">
             <span class="timetable-time">13:00</span>
             <div class="timetable-info">
@@ -518,7 +127,7 @@
           </div>
         </div>
 
-        <div class="timetable-day" data-day="2">
+        <div class="timetable-day" data-day="2" id="day2" role="tabpanel">
           <div class="timetable-item">
             <span class="timetable-time">13:00</span>
             <div class="timetable-info">
@@ -573,37 +182,43 @@
     </section>
 
     <!-- Speakers -->
-    <section class="section">
+    <section class="section fade-in">
       <div class="section-header">
         <p class="section-label">Speakers</p>
         <h2 class="section-title">登壇者</h2>
       </div>
 
       <div class="speakers-grid">
-        <div class="speaker-card">
-          <div class="speaker-image"></div>
+        <article class="speaker-card">
+          <div class="speaker-image">
+            <img src="../assets/images/speaker-1.jpg" alt="松岡 正剛" loading="lazy">
+          </div>
           <div class="speaker-info">
             <p class="speaker-role">校長</p>
             <h3 class="speaker-name">松岡 正剛</h3>
             <p class="speaker-desc">イシス編集学校校長。編集工学研究所所長。</p>
           </div>
-        </div>
-        <div class="speaker-card">
-          <div class="speaker-image"></div>
+        </article>
+        <article class="speaker-card">
+          <div class="speaker-image">
+            <img src="../assets/images/speaker-2.jpg" alt="学林局長" loading="lazy">
+          </div>
           <div class="speaker-info">
             <p class="speaker-role">学林局長</p>
             <h3 class="speaker-name">プレースホルダー</h3>
             <p class="speaker-desc">テキストテキストテキスト</p>
           </div>
-        </div>
-        <div class="speaker-card">
-          <div class="speaker-image"></div>
+        </article>
+        <article class="speaker-card">
+          <div class="speaker-image">
+            <img src="../assets/images/speaker-3.jpg" alt="総合司会" loading="lazy">
+          </div>
           <div class="speaker-info">
             <p class="speaker-role">総合司会</p>
             <h3 class="speaker-name">プレースホルダー</h3>
             <p class="speaker-desc">テキストテキストテキスト</p>
           </div>
-        </div>
+        </article>
       </div>
     </section>
   </main>
@@ -612,49 +227,13 @@
   <footer class="footer">
     <p class="footer-logo">感門之盟</p>
     <div class="footer-links">
-      <a href="#">イシス編集学校</a>
-      <a href="#">エディスト</a>
-      <a href="#">お問い合わせ</a>
+      <a href="https://es.isis.ne.jp/" target="_blank" rel="noopener noreferrer">イシス編集学校</a>
+      <a href="https://edist.isis.ne.jp/" target="_blank" rel="noopener noreferrer">エディスト</a>
+      <a href="info.html">お問い合わせ</a>
     </div>
     <p class="footer-copyright">&copy; イシス編集学校 All Rights Reserved.</p>
   </footer>
 
-  <script>
-    // Mobile menu
-    const hamburger = document.querySelector('.hamburger');
-    const mobileMenu = document.querySelector('.mobile-menu');
-
-    hamburger.addEventListener('click', () => {
-      mobileMenu.classList.toggle('active');
-      hamburger.classList.toggle('active');
-    });
-
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('active');
-        hamburger.classList.remove('active');
-      });
-    });
-
-    // Timetable tabs
-    const tabs = document.querySelectorAll('.timetable-tab');
-    const days = document.querySelectorAll('.timetable-day');
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const day = tab.dataset.day;
-
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-
-        days.forEach(d => {
-          d.classList.remove('active');
-          if (d.dataset.day === day) {
-            d.classList.add('active');
-          }
-        });
-      });
-    });
-  </script>
+  <script src="js/main.js"></script>
 </body>
 </html>
