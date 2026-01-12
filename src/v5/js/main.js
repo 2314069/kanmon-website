@@ -333,11 +333,40 @@ function initStreetProgress() {
     const lastPoint = points[points.length - 1];
     pathD += ` Q ${lastPoint.x} ${lastPoint.y + 100}, ${lastPoint.x} ${lastPoint.y + 200}`;
 
-    // Update all path elements
-    const paths = streetPath.querySelectorAll('path');
-    paths.forEach(path => {
-      path.setAttribute('d', pathD);
-    });
+    // Update road path elements
+    const roadBase = streetPath.querySelector('.road-base');
+    const roadBorder = streetPath.querySelector('.road-border');
+    if (roadBase) roadBase.setAttribute('d', pathD);
+    if (roadBorder) roadBorder.setAttribute('d', pathD);
+
+    // Generate offset paths for grass on both sides
+    const grassLeft = streetPath.querySelector('.road-grass-left');
+    const grassRight = streetPath.querySelector('.road-grass-right');
+
+    if (grassLeft && grassRight && points.length >= 2) {
+      // Create slightly offset paths for grass
+      let leftPathD = `M ${points[0].x - 20} ${points[0].y - 200}`;
+      leftPathD += ` Q ${points[0].x - 20} ${points[0].y - 100}, ${points[0].x - 20} ${points[0].y}`;
+
+      let rightPathD = `M ${points[0].x + 20} ${points[0].y - 200}`;
+      rightPathD += ` Q ${points[0].x + 20} ${points[0].y - 100}, ${points[0].x + 20} ${points[0].y}`;
+
+      for (let i = 0; i < points.length - 1; i++) {
+        const current = points[i];
+        const next = points[i + 1];
+        const midY = (current.y + next.y) / 2;
+
+        leftPathD += ` C ${current.x - 20} ${midY}, ${next.x - 20} ${midY}, ${next.x - 20} ${next.y}`;
+        rightPathD += ` C ${current.x + 20} ${midY}, ${next.x + 20} ${midY}, ${next.x + 20} ${next.y}`;
+      }
+
+      const lastPoint = points[points.length - 1];
+      leftPathD += ` Q ${lastPoint.x - 20} ${lastPoint.y + 100}, ${lastPoint.x - 20} ${lastPoint.y + 200}`;
+      rightPathD += ` Q ${lastPoint.x + 20} ${lastPoint.y + 100}, ${lastPoint.x + 20} ${lastPoint.y + 200}`;
+
+      grassLeft.setAttribute('d', leftPathD);
+      grassRight.setAttribute('d', rightPathD);
+    }
 
     // Update SVG viewBox to match content height
     const totalHeight = mainEl.scrollHeight;
