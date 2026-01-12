@@ -306,34 +306,34 @@ function initStreetProgress() {
     const mainEl = document.querySelector('.street-journey');
     if (!mainEl) return;
 
-    const totalHeight = mainEl.scrollHeight;
-    const baseSegmentHeight = 200;
+    const totalHeight = mainEl.scrollHeight + 100; // Add extra to ensure full coverage
+    const baseSegmentHeight = 150; // Smaller segments for smoother path
     let currentY = 0;
     let segmentIndex = 0;
 
     // Starting position
-    let pathD = 'M 70 0';
+    let pathD = 'M 70 -50'; // Start above viewport
     let currentX = 70;
 
     // Generate irregular winding curves
     while (currentY < totalHeight) {
-      // Randomize segment height
-      const segmentHeight = baseSegmentHeight + seededRandom(segmentIndex * 7) * 150 - 50;
-      const nextY = Math.min(currentY + segmentHeight, totalHeight);
+      // Randomize segment height (smaller range for continuity)
+      const segmentHeight = baseSegmentHeight + seededRandom(segmentIndex * 7) * 100;
+      const nextY = currentY + segmentHeight;
 
       // Irregular direction and curve amount
       const rand1 = seededRandom(segmentIndex * 13 + 1);
       const rand2 = seededRandom(segmentIndex * 17 + 2);
       const rand3 = seededRandom(segmentIndex * 23 + 3);
 
-      // Target X position (20-120 range for more variation)
+      // Target X position (30-110 range)
       const nextX = 30 + rand1 * 80;
 
-      // Randomize control points for irregular curves
-      const cp1x = currentX + (rand2 - 0.5) * 40;
-      const cp1y = currentY + (nextY - currentY) * (0.3 + rand3 * 0.2);
-      const cp2x = nextX + (rand1 - 0.5) * 30;
-      const cp2y = currentY + (nextY - currentY) * (0.6 + rand2 * 0.2);
+      // Smooth control points for continuous curves
+      const cp1x = currentX + (rand2 - 0.5) * 30;
+      const cp1y = currentY + segmentHeight * 0.33;
+      const cp2x = nextX + (rand3 - 0.5) * 30;
+      const cp2y = currentY + segmentHeight * 0.66;
 
       pathD += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${nextX} ${nextY}`;
 
@@ -346,8 +346,8 @@ function initStreetProgress() {
     roadBg.setAttribute('d', pathD);
     roadProgress.setAttribute('d', pathD);
 
-    // Update SVG viewBox
-    streetPath.setAttribute('viewBox', `0 0 150 ${totalHeight}`);
+    // Update SVG viewBox with padding
+    streetPath.setAttribute('viewBox', `-10 -50 170 ${totalHeight + 100}`);
     streetPath.style.height = `${totalHeight}px`;
 
     // Get path length for progress animation

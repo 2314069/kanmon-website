@@ -1692,7 +1692,6 @@ body {
 /* メインコンテナ */
 .street-journey {
   position: relative;
-  overflow: hidden;
 }
 
 /* SVG道路パス */
