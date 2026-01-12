@@ -28,13 +28,12 @@
   --spacing-element: 40px;
 
   /* 道・ストリート用変数 */
-  --street-line-width: 16px;
-  --street-line-color: #e8e8e8;
+  --street-line-width: 2px;
+  --street-line-color: #e0e0e0;
   --street-line-color-active: #1a1a1a;
-  --street-line-border: #d0d0d0;
   --milestone-size: 48px;
-  --milestone-dot-size: 16px;
-  --street-offset-left: 80px;
+  --milestone-dot-size: 12px;
+  --street-offset-left: 60px;
 }
 
 html {
@@ -1693,27 +1692,31 @@ body {
 /* メインコンテナ */
 .street-journey {
   position: relative;
+  overflow: hidden;
 }
 
-/* SVG道路パス */
-.street-path {
-  position: absolute;
+/* 縦の道ライン */
+.street-line {
+  position: fixed;
+  left: var(--street-offset-left);
   top: 0;
-  left: 0;
-  width: 200px;
-  height: 100%;
-  z-index: 1;
+  bottom: 0;
+  width: var(--street-line-width);
+  background: var(--street-line-color);
+  z-index: 100;
   pointer-events: none;
-  overflow: visible;
 }
 
-/* 道路レイヤーの重ね順 */
-.road-border {
-  opacity: 1;
-}
-
-.road-base {
-  opacity: 1;
+/* 進行ライン（スクロールで伸びる） */
+.street-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: var(--street-progress, 0%);
+  background: var(--street-line-color-active);
+  transition: height 0.3s ease-out;
 }
 
 /* 各セクションのストップ */
@@ -1745,14 +1748,13 @@ body {
 /* マイルストーン番号 */
 .milestone-number {
   font-family: var(--font-en);
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 600;
   letter-spacing: 0.1em;
-  color: var(--color-bg);
-  background: var(--color-text);
-  padding: 6px 12px;
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  color: var(--color-text-light);
+  background: var(--color-bg);
+  padding: 4px 8px;
+  border-radius: 2px;
 }
 
 /* マイルストーンドット */
@@ -1760,16 +1762,15 @@ body {
   width: var(--milestone-dot-size);
   height: var(--milestone-dot-size);
   border-radius: 50%;
-  border: 3px solid var(--color-text);
+  border: 2px solid var(--color-text);
   background: var(--color-bg);
   transition: all 0.4s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 /* ドットのアクティブ状態 */
 .street-milestone.active .milestone-dot {
   background: var(--color-text);
-  transform: scale(1.4);
+  transform: scale(1.3);
 }
 
 
@@ -1792,30 +1793,31 @@ body {
   animation: milestoneEnter 0.5s ease forwards;
 }
 
-/* セクションの左マージン調整 */
+/* セクション番号表示（左マージン調整） */
 .street-journey .section {
-  padding-left: 180px;
+  padding-left: calc(var(--street-offset-left) + 60px);
 }
 
 .street-journey .hero {
-  padding-left: 180px;
+  padding-left: calc(var(--street-offset-left) + 60px);
 }
 
 /* タブレット */
 @media (max-width: 1024px) {
-  .street-path {
-    width: 150px;
+  :root {
+    --street-offset-left: 40px;
+    --milestone-dot-size: 10px;
   }
 
   .street-journey .section,
   .street-journey .hero {
-    padding-left: 130px;
+    padding-left: calc(var(--street-offset-left) + 40px);
   }
 }
 
 /* モバイル */
 @media (max-width: 600px) {
-  .street-path {
+  .street-line {
     display: none;
   }
 

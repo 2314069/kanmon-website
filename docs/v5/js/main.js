@@ -284,99 +284,14 @@ function initCarousels() {
 }
 
 /**
- * Street journey progress animation with curved SVG path
+ * Street journey progress animation
  */
 function initStreetProgress() {
-  const streetPath = document.querySelector('.street-path');
+  const streetLine = document.querySelector('.street-line');
   const streetMilestone = document.querySelector('.street-milestone');
   const streetStops = document.querySelectorAll('.street-stop');
 
-  if (!streetPath || streetStops.length === 0) return;
-
-  // Generate curved path through all sections
-  function generateCurvedPath() {
-    const points = [];
-    const mainEl = document.querySelector('.street-journey');
-    if (!mainEl) return;
-
-    const mainRect = mainEl.getBoundingClientRect();
-    const scrollTop = window.scrollY;
-
-    // Collect center points of each section
-    streetStops.forEach((stop, index) => {
-      const rect = stop.getBoundingClientRect();
-      const y = rect.top + scrollTop - mainRect.top + rect.height / 2;
-      // Alternate left and right for bigger S-curve
-      const x = index % 2 === 0 ? 40 : 160;
-      points.push({ x, y });
-    });
-
-    if (points.length < 2) return;
-
-    // Build SVG path with smooth curves
-    let pathD = `M ${points[0].x} ${points[0].y - 200}`;
-
-    // Start curve to first point
-    pathD += ` Q ${points[0].x} ${points[0].y - 100}, ${points[0].x} ${points[0].y}`;
-
-    // Create smooth S-curves between points
-    for (let i = 0; i < points.length - 1; i++) {
-      const current = points[i];
-      const next = points[i + 1];
-      const midY = (current.y + next.y) / 2;
-
-      // S-curve using cubic bezier
-      pathD += ` C ${current.x} ${midY}, ${next.x} ${midY}, ${next.x} ${next.y}`;
-    }
-
-    // End curve
-    const lastPoint = points[points.length - 1];
-    pathD += ` Q ${lastPoint.x} ${lastPoint.y + 100}, ${lastPoint.x} ${lastPoint.y + 200}`;
-
-    // Update road path elements
-    const roadBase = streetPath.querySelector('.road-base');
-    const roadBorder = streetPath.querySelector('.road-border');
-    if (roadBase) roadBase.setAttribute('d', pathD);
-    if (roadBorder) roadBorder.setAttribute('d', pathD);
-
-    // Generate offset paths for grass on both sides
-    const grassLeft = streetPath.querySelector('.road-grass-left');
-    const grassRight = streetPath.querySelector('.road-grass-right');
-
-    if (grassLeft && grassRight && points.length >= 2) {
-      // Create slightly offset paths for grass
-      let leftPathD = `M ${points[0].x - 20} ${points[0].y - 200}`;
-      leftPathD += ` Q ${points[0].x - 20} ${points[0].y - 100}, ${points[0].x - 20} ${points[0].y}`;
-
-      let rightPathD = `M ${points[0].x + 20} ${points[0].y - 200}`;
-      rightPathD += ` Q ${points[0].x + 20} ${points[0].y - 100}, ${points[0].x + 20} ${points[0].y}`;
-
-      for (let i = 0; i < points.length - 1; i++) {
-        const current = points[i];
-        const next = points[i + 1];
-        const midY = (current.y + next.y) / 2;
-
-        leftPathD += ` C ${current.x - 20} ${midY}, ${next.x - 20} ${midY}, ${next.x - 20} ${next.y}`;
-        rightPathD += ` C ${current.x + 20} ${midY}, ${next.x + 20} ${midY}, ${next.x + 20} ${next.y}`;
-      }
-
-      const lastPoint = points[points.length - 1];
-      leftPathD += ` Q ${lastPoint.x - 20} ${lastPoint.y + 100}, ${lastPoint.x - 20} ${lastPoint.y + 200}`;
-      rightPathD += ` Q ${lastPoint.x + 20} ${lastPoint.y + 100}, ${lastPoint.x + 20} ${lastPoint.y + 200}`;
-
-      grassLeft.setAttribute('d', leftPathD);
-      grassRight.setAttribute('d', rightPathD);
-    }
-
-    // Update SVG viewBox to match content height
-    const totalHeight = mainEl.scrollHeight;
-    streetPath.setAttribute('viewBox', `0 0 200 ${totalHeight}`);
-    streetPath.style.height = `${totalHeight}px`;
-  }
-
-  // Generate path on load and resize
-  generateCurvedPath();
-  window.addEventListener('resize', generateCurvedPath);
+  if (!streetLine || streetStops.length === 0) return;
 
   // Show milestone
   if (streetMilestone) {
@@ -424,4 +339,17 @@ function initStreetProgress() {
   });
 
   streetStops.forEach(stop => stopObserver.observe(stop));
+
+  // Update progress line on scroll
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = Math.min((scrollTop / docHeight) * 100, 100);
+
+    streetLine.style.setProperty('--street-progress', `${progress}%`);
+  }, { passive: true });
+
+  // Initial progress update
+  const initialProgress = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+  streetLine.style.setProperty('--street-progress', `${Math.min(initialProgress, 100)}%`);
 }
