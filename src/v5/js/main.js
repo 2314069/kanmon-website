@@ -311,13 +311,13 @@ function initStreetProgress() {
     let currentY = 0;
     let segmentIndex = 0;
 
-    // Starting position
-    let pathD = 'M 70 -50'; // Start above viewport
-    let currentX = 70;
+    // Starting position (center of viewBox)
+    let pathD = 'M 100 0';
+    let currentX = 100;
 
     // Generate irregular winding curves
     while (currentY < totalHeight) {
-      // Randomize segment height (smaller range for continuity)
+      // Randomize segment height
       const segmentHeight = baseSegmentHeight + seededRandom(segmentIndex * 7) * 100;
       const nextY = currentY + segmentHeight;
 
@@ -326,13 +326,13 @@ function initStreetProgress() {
       const rand2 = seededRandom(segmentIndex * 17 + 2);
       const rand3 = seededRandom(segmentIndex * 23 + 3);
 
-      // Target X position (30-110 range)
-      const nextX = 30 + rand1 * 80;
+      // Target X position (50-150 range, centered in 200px width)
+      const nextX = 50 + rand1 * 100;
 
-      // Smooth control points for continuous curves
-      const cp1x = currentX + (rand2 - 0.5) * 30;
+      // Smooth control points - keep within bounds
+      const cp1x = Math.max(20, Math.min(180, currentX + (rand2 - 0.5) * 40));
       const cp1y = currentY + segmentHeight * 0.33;
-      const cp2x = nextX + (rand3 - 0.5) * 30;
+      const cp2x = Math.max(20, Math.min(180, nextX + (rand3 - 0.5) * 40));
       const cp2y = currentY + segmentHeight * 0.66;
 
       pathD += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${nextX} ${nextY}`;
@@ -346,8 +346,8 @@ function initStreetProgress() {
     roadBg.setAttribute('d', pathD);
     roadProgress.setAttribute('d', pathD);
 
-    // Update SVG viewBox with padding
-    streetPath.setAttribute('viewBox', `-10 -50 170 ${totalHeight + 100}`);
+    // Update SVG viewBox
+    streetPath.setAttribute('viewBox', `0 0 200 ${totalHeight}`);
     streetPath.style.height = `${totalHeight}px`;
 
     // Get path length for progress animation
