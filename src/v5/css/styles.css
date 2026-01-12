@@ -1480,6 +1480,31 @@ body {
   margin: 0 auto;
 }
 
+/* Apply Link Section */
+.apply-link-section {
+  text-align: center;
+  padding: 60px 0;
+}
+
+.apply-description {
+  font-size: 18px;
+  margin-bottom: 32px;
+}
+
+.btn-large {
+  display: inline-block;
+  padding: 20px 60px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.apply-note {
+  font-size: 13px;
+  color: var(--color-text-light);
+  margin-top: 16px;
+}
+
 .form-group {
   margin-bottom: 32px;
 }
