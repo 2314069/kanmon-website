@@ -284,23 +284,83 @@ function initCarousels() {
 }
 
 /**
- * Street journey progress animation
+ * Street journey progress animation with natural curves
  */
 function initStreetProgress() {
-  const streetLine = document.querySelector('.street-line');
+  const streetPath = document.querySelector('.street-path');
+  const roadBg = document.querySelector('.road-bg');
+  const roadProgress = document.querySelector('.road-progress');
 
-  if (!streetLine) return;
+  if (!streetPath || !roadBg || !roadProgress) return;
 
-  // Update progress line on scroll
-  window.addEventListener('scroll', () => {
+  let pathLength = 0;
+
+  // Generate natural winding path
+  function generateWindingPath() {
+    const mainEl = document.querySelector('.street-journey');
+    if (!mainEl) return;
+
+    const totalHeight = mainEl.scrollHeight;
+    const segmentHeight = 300; // Height of each curve segment
+    const segments = Math.ceil(totalHeight / segmentHeight);
+
+    // Starting position
+    let pathD = 'M 60 0';
+    let currentX = 60;
+    let currentY = 0;
+
+    // Generate natural winding curves
+    for (let i = 0; i < segments; i++) {
+      const nextY = Math.min((i + 1) * segmentHeight, totalHeight);
+      // Alternate direction with some randomness
+      const direction = i % 2 === 0 ? 1 : -1;
+      const curveAmount = 30 + (i % 3) * 10; // Vary curve intensity
+      const nextX = 60 + direction * curveAmount;
+
+      // Control points for smooth S-curve
+      const cp1x = currentX;
+      const cp1y = currentY + (nextY - currentY) * 0.4;
+      const cp2x = nextX;
+      const cp2y = currentY + (nextY - currentY) * 0.6;
+
+      pathD += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${nextX} ${nextY}`;
+
+      currentX = nextX;
+      currentY = nextY;
+    }
+
+    // Apply path to both elements
+    roadBg.setAttribute('d', pathD);
+    roadProgress.setAttribute('d', pathD);
+
+    // Update SVG viewBox
+    streetPath.setAttribute('viewBox', `0 0 150 ${totalHeight}`);
+    streetPath.style.height = `${totalHeight}px`;
+
+    // Get path length for progress animation
+    pathLength = roadBg.getTotalLength();
+    roadProgress.style.strokeDasharray = pathLength;
+    roadProgress.style.strokeDashoffset = pathLength;
+  }
+
+  // Update progress on scroll
+  function updateProgress() {
     const scrollTop = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = Math.min((scrollTop / docHeight) * 100, 100);
+    const progress = Math.min(scrollTop / docHeight, 1);
 
-    streetLine.style.setProperty('--street-progress', `${progress}%`);
-  }, { passive: true });
+    const offset = pathLength * (1 - progress);
+    roadProgress.style.strokeDashoffset = offset;
+  }
 
-  // Initial progress update
-  const initialProgress = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-  streetLine.style.setProperty('--street-progress', `${Math.min(initialProgress, 100)}%`);
+  // Initialize
+  generateWindingPath();
+  updateProgress();
+
+  window.addEventListener('resize', () => {
+    generateWindingPath();
+    updateProgress();
+  });
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
 }

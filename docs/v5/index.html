@@ -94,8 +94,13 @@
   </div>
 
   <main class="street-journey">
-    <!-- Street Line -->
-    <div class="street-line" aria-hidden="true"></div>
+    <!-- Street Path (curved line) -->
+    <svg class="street-path" aria-hidden="true" preserveAspectRatio="none">
+      <!-- 背景ライン（グレー） -->
+      <path class="road-bg" d="" stroke="#e0e0e0" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <!-- 進行ライン（黒） -->
+      <path class="road-progress" d="" stroke="#1a1a1a" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </svg>
 
     <!-- Hero -->
     <div class="street-stop street-stop--start" data-stop="00">

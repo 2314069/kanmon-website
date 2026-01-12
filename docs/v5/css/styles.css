@@ -1695,28 +1695,24 @@ body {
   overflow: hidden;
 }
 
-/* 縦の道ライン */
-.street-line {
-  position: fixed;
-  left: var(--street-offset-left);
+/* SVG道路パス */
+.street-path {
+  position: absolute;
   top: 0;
-  bottom: 0;
-  width: var(--street-line-width);
-  background: var(--street-line-color);
-  z-index: 100;
+  left: 0;
+  width: 150px;
+  height: 100%;
+  z-index: 1;
   pointer-events: none;
+  overflow: visible;
 }
 
-/* 進行ライン（スクロールで伸びる） */
-.street-line::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: var(--street-progress, 0%);
-  background: var(--street-line-color-active);
-  transition: height 0.3s ease-out;
+.road-bg {
+  opacity: 1;
+}
+
+.road-progress {
+  opacity: 1;
 }
 
 /* 各セクションのストップ */
@@ -1749,7 +1745,7 @@ body {
 
 /* モバイル */
 @media (max-width: 600px) {
-  .street-line {
+  .street-path {
     display: none;
   }
 
