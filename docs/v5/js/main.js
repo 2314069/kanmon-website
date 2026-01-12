@@ -295,38 +295,51 @@ function initStreetProgress() {
 
   let pathLength = 0;
 
+  // Seeded random for consistent results
+  function seededRandom(seed) {
+    const x = Math.sin(seed) * 10000;
+    return x - Math.floor(x);
+  }
+
   // Generate natural winding path
   function generateWindingPath() {
     const mainEl = document.querySelector('.street-journey');
     if (!mainEl) return;
 
     const totalHeight = mainEl.scrollHeight;
-    const segmentHeight = 300; // Height of each curve segment
-    const segments = Math.ceil(totalHeight / segmentHeight);
+    const baseSegmentHeight = 200;
+    let currentY = 0;
+    let segmentIndex = 0;
 
     // Starting position
-    let pathD = 'M 60 0';
-    let currentX = 60;
-    let currentY = 0;
+    let pathD = 'M 70 0';
+    let currentX = 70;
 
-    // Generate natural winding curves
-    for (let i = 0; i < segments; i++) {
-      const nextY = Math.min((i + 1) * segmentHeight, totalHeight);
-      // Alternate direction with some randomness
-      const direction = i % 2 === 0 ? 1 : -1;
-      const curveAmount = 30 + (i % 3) * 10; // Vary curve intensity
-      const nextX = 60 + direction * curveAmount;
+    // Generate irregular winding curves
+    while (currentY < totalHeight) {
+      // Randomize segment height
+      const segmentHeight = baseSegmentHeight + seededRandom(segmentIndex * 7) * 150 - 50;
+      const nextY = Math.min(currentY + segmentHeight, totalHeight);
 
-      // Control points for smooth S-curve
-      const cp1x = currentX;
-      const cp1y = currentY + (nextY - currentY) * 0.4;
-      const cp2x = nextX;
-      const cp2y = currentY + (nextY - currentY) * 0.6;
+      // Irregular direction and curve amount
+      const rand1 = seededRandom(segmentIndex * 13 + 1);
+      const rand2 = seededRandom(segmentIndex * 17 + 2);
+      const rand3 = seededRandom(segmentIndex * 23 + 3);
+
+      // Target X position (20-120 range for more variation)
+      const nextX = 30 + rand1 * 80;
+
+      // Randomize control points for irregular curves
+      const cp1x = currentX + (rand2 - 0.5) * 40;
+      const cp1y = currentY + (nextY - currentY) * (0.3 + rand3 * 0.2);
+      const cp2x = nextX + (rand1 - 0.5) * 30;
+      const cp2y = currentY + (nextY - currentY) * (0.6 + rand2 * 0.2);
 
       pathD += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${nextX} ${nextY}`;
 
       currentX = nextX;
       currentY = nextY;
+      segmentIndex++;
     }
 
     // Apply path to both elements
