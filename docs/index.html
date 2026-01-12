@@ -140,6 +140,23 @@
       background: #C84B31;
     }
 
+    .version-minimal {
+      background: #FFFFFF;
+      color: #1a1a1a;
+    }
+
+    .version-minimal::before {
+      background: linear-gradient(135deg, #FAFAFA 0%, #FFFFFF 100%);
+    }
+
+    .version-minimal .version-title {
+      font-family: 'Noto Serif JP', serif;
+    }
+
+    .version-minimal .version-accent {
+      background: #1a1a1a;
+    }
+
     .version:hover .version-accent {
       width: 60px;
     }
@@ -203,6 +220,16 @@
         <h2 class="version-title">読奏エディストリート</h2>
         <div class="version-accent"></div>
         <p class="version-desc">エレガントなライトテーマ</p>
+        <div class="version-enter">Enter Site &rarr;</div>
+      </div>
+    </a>
+
+    <a href="v4/index.html" class="version version-minimal">
+      <div class="version-content">
+        <div class="version-label">Minimal Theme</div>
+        <h2 class="version-title">読奏エディストリート</h2>
+        <div class="version-accent"></div>
+        <p class="version-desc">千夜千冊風ミニマルデザイン</p>
         <div class="version-enter">Enter Site &rarr;</div>
       </div>
     </a>
