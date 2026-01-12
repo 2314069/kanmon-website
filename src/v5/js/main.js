@@ -288,57 +288,8 @@ function initCarousels() {
  */
 function initStreetProgress() {
   const streetLine = document.querySelector('.street-line');
-  const streetMilestone = document.querySelector('.street-milestone');
-  const streetStops = document.querySelectorAll('.street-stop');
 
-  if (!streetLine || streetStops.length === 0) return;
-
-  // Show milestone
-  if (streetMilestone) {
-    streetMilestone.classList.add('visible');
-  }
-
-  // Track current active stop
-  let currentStop = null;
-
-  // Intersection Observer for stop detection
-  const stopObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const stopNumber = entry.target.dataset.stop;
-
-        // Update milestone number
-        if (streetMilestone) {
-          const numberEl = streetMilestone.querySelector('.milestone-number');
-          if (numberEl && numberEl.textContent !== stopNumber) {
-            numberEl.textContent = stopNumber;
-            streetMilestone.classList.remove('animate');
-            void streetMilestone.offsetWidth; // Force reflow
-            streetMilestone.classList.add('animate');
-          }
-        }
-
-        // Mark as active
-        if (entry.target !== currentStop) {
-          if (currentStop) {
-            currentStop.classList.remove('active');
-          }
-          entry.target.classList.add('active');
-          currentStop = entry.target;
-
-          // Update milestone active state
-          if (streetMilestone) {
-            streetMilestone.classList.add('active');
-          }
-        }
-      }
-    });
-  }, {
-    threshold: 0.3,
-    rootMargin: '-40% 0px -40% 0px'
-  });
-
-  streetStops.forEach(stop => stopObserver.observe(stop));
+  if (!streetLine) return;
 
   // Update progress line on scroll
   window.addEventListener('scroll', () => {
