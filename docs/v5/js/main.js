@@ -302,56 +302,73 @@ function initStreetProgress() {
     return x - Math.floor(x);
   }
 
-  // Generate stones along the path
-  function generateStones(pathPoints) {
+  // Generate books along the path
+  function generateBooks(pathPoints) {
     if (!roadStones) return;
 
-    // Clear existing stones
+    // Clear existing elements
     roadStones.innerHTML = '';
 
-    const stoneColors = ['#c0c0c0', '#a8a8a8', '#909090', '#b8b8b8', '#d0d0d0'];
-    let stoneIndex = 0;
+    // Book cover colors
+    const bookColors = ['#8B4513', '#2F4F4F', '#800020', '#1a1a1a', '#4A4A4A', '#556B2F'];
+    let bookIndex = 0;
     let lastY = 0;
 
     pathPoints.forEach((point, i) => {
-      // Place stones at random intervals (150-350px)
-      const interval = 150 + seededRandom(i * 31) * 200;
+      // Place books at random intervals (200-400px)
+      const interval = 200 + seededRandom(i * 31) * 200;
 
       if (point.y - lastY >= interval) {
-        // Create 1-3 stones at this position
-        const stoneCount = 1 + Math.floor(seededRandom(stoneIndex * 41) * 3);
+        // Create 1-2 books at this position
+        const bookCount = 1 + Math.floor(seededRandom(bookIndex * 41) * 2);
 
-        for (let j = 0; j < stoneCount; j++) {
-          const stone = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+        for (let j = 0; j < bookCount; j++) {
+          const book = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 
-          // Size variation (3-10px)
-          const rx = 3 + seededRandom(stoneIndex * 47 + j) * 7;
-          const ry = rx * (0.6 + seededRandom(stoneIndex * 53 + j) * 0.4);
+          // Book size variation (width: 8-14px, height: 12-18px)
+          const bookWidth = 8 + seededRandom(bookIndex * 47 + j) * 6;
+          const bookHeight = bookWidth * (1.3 + seededRandom(bookIndex * 53 + j) * 0.3);
 
-          // Position offset from path (15-35px to left or right)
-          const side = seededRandom(stoneIndex * 59 + j) > 0.5 ? 1 : -1;
-          const offset = 15 + seededRandom(stoneIndex * 61 + j) * 20;
-          const cx = point.x + (side * offset) + (seededRandom(stoneIndex * 67 + j) - 0.5) * 10;
-          const cy = point.y + (seededRandom(stoneIndex * 71 + j) - 0.5) * 30;
+          // Position offset from path (20-40px to left or right)
+          const side = seededRandom(bookIndex * 59 + j) > 0.5 ? 1 : -1;
+          const offset = 20 + seededRandom(bookIndex * 61 + j) * 20;
+          const cx = point.x + (side * offset) + (seededRandom(bookIndex * 67 + j) - 0.5) * 10;
+          const cy = point.y + (seededRandom(bookIndex * 71 + j) - 0.5) * 30;
 
           // Color
-          const colorIndex = Math.floor(seededRandom(stoneIndex * 73 + j) * stoneColors.length);
+          const colorIndex = Math.floor(seededRandom(bookIndex * 73 + j) * bookColors.length);
+          const bookColor = bookColors[colorIndex];
 
-          // Rotation
-          const rotation = seededRandom(stoneIndex * 79 + j) * 360;
+          // Rotation (slight tilt: -30 to 30 degrees)
+          const rotation = (seededRandom(bookIndex * 79 + j) - 0.5) * 60;
 
-          stone.setAttribute('cx', cx);
-          stone.setAttribute('cy', cy);
-          stone.setAttribute('rx', rx);
-          stone.setAttribute('ry', ry);
-          stone.setAttribute('fill', stoneColors[colorIndex]);
-          stone.setAttribute('transform', `rotate(${rotation} ${cx} ${cy})`);
+          // Create book shape (closed book from side view)
+          const bookBody = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+          bookBody.setAttribute('x', cx - bookWidth / 2);
+          bookBody.setAttribute('y', cy - bookHeight / 2);
+          bookBody.setAttribute('width', bookWidth);
+          bookBody.setAttribute('height', bookHeight);
+          bookBody.setAttribute('fill', bookColor);
+          bookBody.setAttribute('rx', '1');
 
-          roadStones.appendChild(stone);
+          // Pages (lighter stripe)
+          const pages = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+          const pagesWidth = bookWidth * 0.15;
+          pages.setAttribute('x', cx - bookWidth / 2);
+          pages.setAttribute('y', cy - bookHeight / 2 + 1);
+          pages.setAttribute('width', pagesWidth);
+          pages.setAttribute('height', bookHeight - 2);
+          pages.setAttribute('fill', '#f5f5dc');
+
+          book.appendChild(bookBody);
+          book.appendChild(pages);
+          book.setAttribute('transform', `rotate(${rotation} ${cx} ${cy})`);
+
+          roadStones.appendChild(book);
         }
 
         lastY = point.y;
-        stoneIndex++;
+        bookIndex++;
       }
     });
   }
@@ -418,8 +435,8 @@ function initStreetProgress() {
     roadProgress.style.strokeDasharray = pathLength;
     roadProgress.style.strokeDashoffset = pathLength;
 
-    // Generate stones along the path
-    generateStones(pathPoints);
+    // Generate books along the path
+    generateBooks(pathPoints);
   }
 
   // Update progress on scroll
