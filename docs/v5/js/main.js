@@ -290,6 +290,7 @@ function initStreetProgress() {
   const streetPath = document.querySelector('.street-path');
   const roadBg = document.querySelector('.road-bg');
   const roadProgress = document.querySelector('.road-progress');
+  const roadStones = document.querySelector('.road-stones');
 
   if (!streetPath || !roadBg || !roadProgress) return;
 
@@ -299,6 +300,60 @@ function initStreetProgress() {
   function seededRandom(seed) {
     const x = Math.sin(seed) * 10000;
     return x - Math.floor(x);
+  }
+
+  // Generate stones along the path
+  function generateStones(pathPoints) {
+    if (!roadStones) return;
+
+    // Clear existing stones
+    roadStones.innerHTML = '';
+
+    const stoneColors = ['#c0c0c0', '#a8a8a8', '#909090', '#b8b8b8', '#d0d0d0'];
+    let stoneIndex = 0;
+    let lastY = 0;
+
+    pathPoints.forEach((point, i) => {
+      // Place stones at random intervals (150-350px)
+      const interval = 150 + seededRandom(i * 31) * 200;
+
+      if (point.y - lastY >= interval) {
+        // Create 1-3 stones at this position
+        const stoneCount = 1 + Math.floor(seededRandom(stoneIndex * 41) * 3);
+
+        for (let j = 0; j < stoneCount; j++) {
+          const stone = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+
+          // Size variation (3-10px)
+          const rx = 3 + seededRandom(stoneIndex * 47 + j) * 7;
+          const ry = rx * (0.6 + seededRandom(stoneIndex * 53 + j) * 0.4);
+
+          // Position offset from path (15-35px to left or right)
+          const side = seededRandom(stoneIndex * 59 + j) > 0.5 ? 1 : -1;
+          const offset = 15 + seededRandom(stoneIndex * 61 + j) * 20;
+          const cx = point.x + (side * offset) + (seededRandom(stoneIndex * 67 + j) - 0.5) * 10;
+          const cy = point.y + (seededRandom(stoneIndex * 71 + j) - 0.5) * 30;
+
+          // Color
+          const colorIndex = Math.floor(seededRandom(stoneIndex * 73 + j) * stoneColors.length);
+
+          // Rotation
+          const rotation = seededRandom(stoneIndex * 79 + j) * 360;
+
+          stone.setAttribute('cx', cx);
+          stone.setAttribute('cy', cy);
+          stone.setAttribute('rx', rx);
+          stone.setAttribute('ry', ry);
+          stone.setAttribute('fill', stoneColors[colorIndex]);
+          stone.setAttribute('transform', `rotate(${rotation} ${cx} ${cy})`);
+
+          roadStones.appendChild(stone);
+        }
+
+        lastY = point.y;
+        stoneIndex++;
+      }
+    });
   }
 
   // Generate natural winding path
@@ -314,6 +369,9 @@ function initStreetProgress() {
     // Starting position (center of viewBox)
     let pathD = 'M 100 0';
     let currentX = 100;
+
+    // Collect path points for stone placement
+    const pathPoints = [{ x: currentX, y: currentY }];
 
     // Generate irregular winding curves
     while (currentY < totalHeight) {
@@ -337,6 +395,11 @@ function initStreetProgress() {
 
       pathD += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${nextX} ${nextY}`;
 
+      // Store intermediate points for stone placement
+      pathPoints.push({ x: cp1x, y: cp1y });
+      pathPoints.push({ x: cp2x, y: cp2y });
+      pathPoints.push({ x: nextX, y: nextY });
+
       currentX = nextX;
       currentY = nextY;
       segmentIndex++;
@@ -354,6 +417,9 @@ function initStreetProgress() {
     pathLength = roadBg.getTotalLength();
     roadProgress.style.strokeDasharray = pathLength;
     roadProgress.style.strokeDashoffset = pathLength;
+
+    // Generate stones along the path
+    generateStones(pathPoints);
   }
 
   // Update progress on scroll
