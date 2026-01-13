@@ -302,73 +302,51 @@ function initStreetProgress() {
     return x - Math.floor(x);
   }
 
-  // Generate books along the path
-  function generateBooks(pathPoints) {
+  // Generate circular icons along the path
+  function generateIcons(pathPoints) {
     if (!roadStones) return;
 
     // Clear existing elements
     roadStones.innerHTML = '';
 
-    // Book cover colors
-    const bookColors = ['#8B4513', '#2F4F4F', '#800020', '#1a1a1a', '#4A4A4A', '#556B2F'];
-    let bookIndex = 0;
+    // Soft, muted colors
+    const iconColors = ['#c0c0c0', '#a0a0a0', '#d0d0d0', '#b8b8b8', '#909090'];
+    let iconIndex = 0;
     let lastY = 0;
 
     pathPoints.forEach((point, i) => {
-      // Place books at random intervals (200-400px)
-      const interval = 200 + seededRandom(i * 31) * 200;
+      // Place icons at random intervals (180-380px)
+      const interval = 180 + seededRandom(i * 31) * 200;
 
       if (point.y - lastY >= interval) {
-        // Create 1-2 books at this position
-        const bookCount = 1 + Math.floor(seededRandom(bookIndex * 41) * 2);
+        // Create 1-3 circles at this position
+        const iconCount = 1 + Math.floor(seededRandom(iconIndex * 41) * 3);
 
-        for (let j = 0; j < bookCount; j++) {
-          const book = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        for (let j = 0; j < iconCount; j++) {
+          const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 
-          // Book size variation (width: 8-14px, height: 12-18px)
-          const bookWidth = 8 + seededRandom(bookIndex * 47 + j) * 6;
-          const bookHeight = bookWidth * (1.3 + seededRandom(bookIndex * 53 + j) * 0.3);
+          // Size variation (radius: 3-8px)
+          const radius = 3 + seededRandom(iconIndex * 47 + j) * 5;
 
-          // Position offset from path (20-40px to left or right)
-          const side = seededRandom(bookIndex * 59 + j) > 0.5 ? 1 : -1;
-          const offset = 20 + seededRandom(bookIndex * 61 + j) * 20;
-          const cx = point.x + (side * offset) + (seededRandom(bookIndex * 67 + j) - 0.5) * 10;
-          const cy = point.y + (seededRandom(bookIndex * 71 + j) - 0.5) * 30;
+          // Position offset from path (18-38px to left or right)
+          const side = seededRandom(iconIndex * 59 + j) > 0.5 ? 1 : -1;
+          const offset = 18 + seededRandom(iconIndex * 61 + j) * 20;
+          const cx = point.x + (side * offset) + (seededRandom(iconIndex * 67 + j) - 0.5) * 10;
+          const cy = point.y + (seededRandom(iconIndex * 71 + j) - 0.5) * 30;
 
           // Color
-          const colorIndex = Math.floor(seededRandom(bookIndex * 73 + j) * bookColors.length);
-          const bookColor = bookColors[colorIndex];
+          const colorIndex = Math.floor(seededRandom(iconIndex * 73 + j) * iconColors.length);
 
-          // Rotation (slight tilt: -30 to 30 degrees)
-          const rotation = (seededRandom(bookIndex * 79 + j) - 0.5) * 60;
+          circle.setAttribute('cx', cx);
+          circle.setAttribute('cy', cy);
+          circle.setAttribute('r', radius);
+          circle.setAttribute('fill', iconColors[colorIndex]);
 
-          // Create book shape (closed book from side view)
-          const bookBody = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-          bookBody.setAttribute('x', cx - bookWidth / 2);
-          bookBody.setAttribute('y', cy - bookHeight / 2);
-          bookBody.setAttribute('width', bookWidth);
-          bookBody.setAttribute('height', bookHeight);
-          bookBody.setAttribute('fill', bookColor);
-          bookBody.setAttribute('rx', '1');
-
-          // Pages (lighter stripe)
-          const pages = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-          const pagesWidth = bookWidth * 0.15;
-          pages.setAttribute('x', cx - bookWidth / 2);
-          pages.setAttribute('y', cy - bookHeight / 2 + 1);
-          pages.setAttribute('width', pagesWidth);
-          pages.setAttribute('height', bookHeight - 2);
-          pages.setAttribute('fill', '#f5f5dc');
-
-          book.appendChild(bookBody);
-          book.appendChild(pages);
-          book.setAttribute('transform', `rotate(${rotation} ${cx} ${cy})`);
-
-          roadStones.appendChild(book);
+          roadStones.appendChild(circle);
         }
 
         lastY = point.y;
-        bookIndex++;
+        iconIndex++;
       }
     });
   }
@@ -435,8 +413,8 @@ function initStreetProgress() {
     roadProgress.style.strokeDasharray = pathLength;
     roadProgress.style.strokeDashoffset = pathLength;
 
-    // Generate books along the path
-    generateBooks(pathPoints);
+    // Generate icons along the path
+    generateIcons(pathPoints);
   }
 
   // Update progress on scroll
