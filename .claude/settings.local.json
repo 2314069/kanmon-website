@@ -23,7 +23,10 @@
       "Bash(tree:*)",
       "Bash(find:*)",
       "Bash(cat:*)",
-      "Bash(git -C /Users/asato/Library/CloudStorage/OneDrive-個人用/FOLDER/04_Dev/dev_kanmon-website log --oneline)"
+      "Bash(git -C /Users/asato/Library/CloudStorage/OneDrive-個人用/FOLDER/04_Dev/dev_kanmon-website log --oneline)",
+      "WebFetch(domain:1000ya.isis.ne.jp)",
+      "WebFetch(domain:2314069.github.io)",
+      "Bash(dir /s /b \"C:\\\\Users\\\\nakam\\\\OneDrive\\\\FOLDER\\\\04_Dev\\\\dev_kanmon-website\")"
     ]
   }
 }
