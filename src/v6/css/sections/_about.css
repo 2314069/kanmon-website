@@ -1,0 +1,35 @@
+/* ============================================
+   About Section
+   ============================================ */
+.about {
+  background: var(--color-white);
+}
+
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-image {
+  margin-bottom: 40px;
+}
+
+.about-image img {
+  max-width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.about-text {
+  font-size: 18px;
+  line-height: 2.4;
+  letter-spacing: 0.05em;
+}
+
+.about-text strong {
+  color: var(--color-accent);
+  font-weight: 600;
+}

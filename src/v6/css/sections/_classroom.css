@@ -1,0 +1,187 @@
+/* ============================================
+   Classroom Cards
+   ============================================ */
+
+/* Team Structure */
+.team-list {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.team-block {
+  background: var(--color-bg-dark);
+  padding: 32px;
+  border-radius: 4px;
+}
+
+.team-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.team-name {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+.team-shihan {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.team-shihan .staff-role {
+  font-family: var(--font-en);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+}
+
+.team-shihan .staff-name {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.team-block .classroom-grid {
+  gap: 24px;
+}
+
+.team-block .classroom-card {
+  background: var(--color-white);
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.team-block .classroom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.team-block .classroom-name {
+  font-size: 16px;
+  margin-bottom: 0;
+}
+
+.team-block .staff-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.team-block .staff-item .staff-role {
+  font-family: var(--font-en);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+}
+
+.team-block .staff-item .staff-name {
+  font-size: 14px;
+}
+
+/* Classroom Grid */
+.classroom-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.classroom-card {
+  background: var(--color-white);
+  padding: 40px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.classroom-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.08);
+}
+
+.classroom-image {
+  aspect-ratio: 16/9;
+  background: var(--color-bg-dark);
+  position: relative;
+}
+
+.classroom-info {
+  padding: 24px;
+}
+
+.classroom-course {
+  font-family: var(--font-en);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 8px;
+}
+
+.classroom-name {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.classroom-teacher {
+  font-size: 14px;
+  color: var(--color-text-light);
+}
+
+.classroom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid var(--color-accent);
+}
+
+.classroom-badge {
+  font-family: var(--font-en);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  padding: 6px 16px;
+  background: var(--color-bg);
+  color: var(--color-text-light);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .team-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .team-block {
+    padding: 24px 20px;
+  }
+
+  .classroom-card {
+    padding: 24px;
+  }
+
+  .classroom-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,36 @@
+/* ============================================
+   Responsive Utilities
+   ============================================ */
+
+/* Common responsive adjustments */
+@media (max-width: 900px) {
+  .section {
+    padding: 80px 40px;
+  }
+
+  .section-header {
+    margin-bottom: 60px;
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 60px 24px;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .section-header {
+    margin-bottom: 40px;
+  }
+
+  .page-header {
+    padding: 120px 24px 60px;
+  }
+
+  .page-title {
+    font-size: 28px;
+  }
+}

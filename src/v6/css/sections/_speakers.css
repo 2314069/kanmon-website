@@ -1,0 +1,68 @@
+/* ============================================
+   Speakers
+   ============================================ */
+.speakers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.speaker-card {
+  background: var(--color-white);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.speaker-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.speaker-image {
+  aspect-ratio: 1;
+  background: var(--color-bg-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.speaker-info {
+  padding: 24px;
+}
+
+.speaker-role {
+  font-family: var(--font-en);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 8px;
+}
+
+.speaker-name {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.speaker-desc {
+  font-size: 13px;
+  color: var(--color-text-light);
+  line-height: 1.8;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .speakers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .speakers-grid {
+    grid-template-columns: 1fr;
+  }
+}

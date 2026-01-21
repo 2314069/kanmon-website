@@ -1,0 +1,56 @@
+/* ============================================
+   Common Card Styles
+   ============================================ */
+
+/* Overview Cards */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.overview-card {
+  background: var(--color-white);
+  padding: 48px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.overview-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.overview-icon {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.overview-label {
+  font-family: var(--font-en);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  margin-bottom: 12px;
+}
+
+.overview-value {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .overview-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

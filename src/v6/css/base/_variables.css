@@ -1,0 +1,115 @@
+/* ============================================
+   Base Variables & Reset
+   ============================================ */
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Color Palette */
+  --color-bg: #FFFFFF;
+  --color-bg-dark: #FAFAFA;
+  --color-text: #1a1a1a;
+  --color-text-light: #666666;
+  --color-accent: #1a1a1a;
+  --color-accent-dark: #000000;
+  --color-white: #FFFFFF;
+  --color-border: #e0e0e0;
+
+  /* Typography */
+  --font-jp: 'Noto Serif JP', serif;
+  --font-en: 'Outfit', sans-serif;
+
+  /* Spacing */
+  --spacing-section: 160px;
+  --spacing-block: 80px;
+  --spacing-element: 40px;
+
+  /* Street Journey */
+  --street-line-width: 2px;
+  --street-line-color: #e0e0e0;
+  --street-line-color-active: #1a1a1a;
+  --milestone-size: 48px;
+  --milestone-dot-size: 12px;
+  --street-offset-left: 60px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-jp);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 2.0;
+}
+
+/* ============================================
+   Common Section Styles
+   ============================================ */
+.section {
+  padding: var(--spacing-section) 60px;
+}
+
+.section-white {
+  background: var(--color-white);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.section-label {
+  font-family: var(--font-en);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+}
+
+/* ============================================
+   Page Header (Sub Pages)
+   ============================================ */
+.page-header {
+  padding: 160px 60px 80px;
+  text-align: center;
+  background: var(--color-white);
+}
+
+.page-label {
+  font-family: var(--font-en);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 16px;
+}
+
+.page-title {
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+}
+
+.page-desc {
+  font-size: 15px;
+  color: var(--color-text-light);
+  max-width: 600px;
+  margin: 24px auto 0;
+  line-height: 2;
+}

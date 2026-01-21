@@ -1,0 +1,134 @@
+/* ============================================
+   Tabs (Timetable & Course)
+   ============================================ */
+
+/* Timetable Tabs */
+.timetable-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 60px;
+}
+
+.timetable-tab {
+  padding: 16px 40px;
+  font-family: var(--font-en);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  background: transparent;
+  border: 2px solid var(--color-text);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.timetable-tab.active,
+.timetable-tab:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+/* Course Tabs (Classroom Page) */
+.course-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+}
+
+.course-tab {
+  padding: 14px 32px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  background: transparent;
+  border: 2px solid var(--color-text);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.course-tab.active,
+.course-tab:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-white);
+}
+
+.course-content {
+  display: none;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.course-content.active {
+  display: block;
+}
+
+/* Staff Grid */
+.staff-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.staff-item {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.staff-image {
+  width: 64px;
+  height: 64px;
+  background: var(--color-bg-dark);
+  flex-shrink: 0;
+}
+
+.staff-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 100px;
+}
+
+.staff-role {
+  font-family: var(--font-en);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.staff-name {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.staff-desc {
+  flex: 1;
+  font-size: 13px;
+  color: var(--color-text-light);
+  line-height: 1.7;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .timetable-tabs {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .course-tabs {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .staff-item {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

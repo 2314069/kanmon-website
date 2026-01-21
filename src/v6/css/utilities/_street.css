@@ -1,0 +1,67 @@
+/* ============================================
+   Street Journey Layout
+   ============================================ */
+
+/* Main Container */
+.street-journey {
+  position: relative;
+}
+
+/* SVG Road Path */
+.street-path {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.road-bg {
+  opacity: 1;
+}
+
+.road-progress {
+  opacity: 1;
+}
+
+/* Section Stops */
+.street-stop {
+  position: relative;
+  z-index: 1;
+}
+
+/* Sections with left margin adjustment */
+.street-journey .section {
+  padding-left: calc(var(--street-offset-left) + 60px);
+}
+
+.street-journey .hero {
+  padding-left: calc(var(--street-offset-left) + 60px);
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  :root {
+    --street-offset-left: 40px;
+    --milestone-dot-size: 10px;
+  }
+
+  .street-journey .section,
+  .street-journey .hero {
+    padding-left: calc(var(--street-offset-left) + 40px);
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .street-path {
+    display: none;
+  }
+
+  .street-journey .section,
+  .street-journey .hero {
+    padding-left: 24px;
+  }
+}

@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="view-transition" content="same-origin">
+  <title>教室一覧 | 90回感門之盟</title>
+  <meta name="description" content="感門之盟の教室一覧・師範代紹介。">
+
+  <!-- OGP -->
+  <meta property="og:title" content="教室一覧 | 90回感門之盟">
+  <meta property="og:description" content="感門之盟の教室一覧・師範代紹介。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://example.com/classroom.html">
+  <meta property="og:image" content="https://example.com/assets/images/ogp.png">
+  <meta property="og:site_name" content="感門之盟">
+  <meta property="og:locale" content="ja_JP">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="教室一覧 | 90回感門之盟">
+  <meta name="twitter:description" content="感門之盟の教室一覧・師範代紹介。">
+  <meta name="twitter:image" content="https://example.com/assets/images/ogp.png">
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/images/favicon.ico" sizes="any">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav nav-solid" role="navigation" aria-label="メインナビゲーション">
+    <a href="index.html" class="nav-logo">感門之盟</a>
+    <div class="nav-menu">
+      <a href="index.html">Top</a>
+      <a href="program.html">Program</a>
+      <a href="classroom.html" class="active">Classroom</a>
+      <a href="info.html">Info</a>
+      <a href="edist.html">Edist</a>
+      <a href="interbooking.html">Interbooking</a>
+      <a href="apply.html">Apply</a>
+    </div>
+    <button class="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="モバイルメニュー">
+    <button class="mobile-menu-close" aria-label="メニューを閉じる">&times;</button>
+    <a href="index.html">Top</a>
+    <a href="program.html">Program</a>
+    <a href="classroom.html">Classroom</a>
+    <a href="info.html">Info</a>
+    <a href="edist.html">Edist</a>
+    <a href="interbooking.html">Interbooking</a>
+    <a href="apply.html">Apply</a>
+  </div>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <p class="page-label">Classroom</p>
+    <h1 class="page-title">教室一覧</h1>
+  </header>
+
+  <main>
+    <section class="section fade-in">
+      <!-- Course Tabs -->
+      <div class="course-tabs" role="tablist" aria-label="コース選択">
+        <button class="course-tab active" data-course="mamoru" role="tab" aria-selected="true">守</button>
+        <button class="course-tab" data-course="monogatari" role="tab" aria-selected="false">物語講座</button>
+        <button class="course-tab" data-course="ha" role="tab" aria-selected="false">破</button>
+        <button class="course-tab" data-course="kaden" role="tab" aria-selected="false">花伝所</button>
+      </div>
+
+      <!-- 守（10チーム × 2教室 = 20教室） -->
+      <div class="course-content active" data-course="mamoru" role="tabpanel">
+        <div class="team-list">
+          <!-- チーム1 -->
+          <div class="team-block">
+            <div class="team-header">
+              <h3 class="team-name">チーム 1</h3>
+              <div class="team-shihan">
+                <span class="staff-role">師範</span>
+                <span class="staff-name">－</span>
+              </div>
+            </div>
+            <div class="classroom-grid">
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 1</h4>
+                  <span class="classroom-badge">57守</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 2</h4>
+                  <span class="classroom-badge">57守</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+            </div>
+          </div>
+          <!-- チーム2 -->
+          <div class="team-block">
+            <div class="team-header">
+              <h3 class="team-name">チーム 2</h3>
+              <div class="team-shihan">
+                <span class="staff-role">師範</span>
+                <span class="staff-name">－</span>
+              </div>
+            </div>
+            <div class="classroom-grid">
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 3</h4>
+                  <span class="classroom-badge">57守</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 4</h4>
+                  <span class="classroom-badge">57守</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+            </div>
+          </div>
+          <!-- チーム3 -->
+          <div class="team-block">
+            <div class="team-header">
+              <h3 class="team-name">チーム 3</h3>
+              <div class="team-shihan">
+                <span class="staff-role">師範</span>
+                <span class="staff-name">－</span>
+              </div>
+            </div>
+            <div class="classroom-grid">
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 5</h4>
+                  <span class="classroom-badge">57守</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 6</h4>
+                  <span class="classroom-badge">57守</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+            </div>
+          </div>
+          <!-- チーム4 -->
+          <div class="team-block">
+            <div class="team-header">
+              <h3 class="team-name">チーム 4</h3>
+              <div class="team-shihan">
+                <span class="staff-role">師範</span>
+                <span class="staff-name">－</span>
+              </div>
+            </div>
+            <div class="classroom-grid">
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 7</h4>
+                  <span class="classroom-badge">57守</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 8</h4>
+                  <span class="classroom-badge">57守</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+            </div>
+          </div>
+          <!-- チーム5 -->
+          <div class="team-block">
+            <div class="team-header">
+              <h3 class="team-name">チーム 5</h3>
+              <div class="team-shihan">
+                <span class="staff-role">師範</span>
+                <span class="staff-name">－</span>
+              </div>
+            </div>
+            <div class="classroom-grid">
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 9</h4>
+                  <span class="classroom-badge">57守</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 10</h4>
+                  <span class="classroom-badge">57守</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+            </div>
+          </div>
+          <!-- チーム6 -->
+          <div class="team-block">
+            <div class="team-header">
+              <h3 class="team-name">チーム 6</h3>
+              <div class="team-shihan">
+                <span class="staff-role">師範</span>
+                <span class="staff-name">－</span>
+              </div>
+            </div>
+            <div class="classroom-grid">
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 11</h4>
+                  <span class="classroom-badge">57守</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 12</h4>
+                  <span class="classroom-badge">57守</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+            </div>
+          </div>
+          <!-- チーム7 -->
+          <div class="team-block">
+            <div class="team-header">
+              <h3 class="team-name">チーム 7</h3>
+              <div class="team-shihan">
+                <span class="staff-role">師範</span>
+                <span class="staff-name">－</span>
+              </div>
+            </div>
+            <div class="classroom-grid">
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 13</h4>
+                  <span class="classroom-badge">57守</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 14</h4>
+                  <span class="classroom-badge">57守</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+            </div>
+          </div>
+          <!-- チーム8 -->
+          <div class="team-block">
+            <div class="team-header">
+              <h3 class="team-name">チーム 8</h3>
+              <div class="team-shihan">
+                <span class="staff-role">師範</span>
+                <span class="staff-name">－</span>
+              </div>
+            </div>
+            <div class="classroom-grid">
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 15</h4>
+                  <span class="classroom-badge">57守</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 16</h4>
+                  <span class="classroom-badge">57守</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+            </div>
+          </div>
+          <!-- チーム9 -->
+          <div class="team-block">
+            <div class="team-header">
+              <h3 class="team-name">チーム 9</h3>
+              <div class="team-shihan">
+                <span class="staff-role">師範</span>
+                <span class="staff-name">－</span>
+              </div>
+            </div>
+            <div class="classroom-grid">
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 17</h4>
+                  <span class="classroom-badge">57守</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 18</h4>
+                  <span class="classroom-badge">57守</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+            </div>
+          </div>
+          <!-- チーム10 -->
+          <div class="team-block">
+            <div class="team-header">
+              <h3 class="team-name">チーム 10</h3>
+              <div class="team-shihan">
+                <span class="staff-role">師範</span>
+                <span class="staff-name">－</span>
+              </div>
+            </div>
+            <div class="classroom-grid">
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 19</h4>
+                  <span class="classroom-badge">57守</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 20</h4>
+                  <span class="classroom-badge">57守</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 物語講座（4教室） -->
+      <div class="course-content" data-course="monogatari" role="tabpanel">
+        <div class="classroom-grid">
+          <article class="classroom-card">
+            <div class="classroom-header">
+              <h3 class="classroom-name">教室 1</h3>
+              <span class="classroom-badge">物語講座</span>
+            </div>
+            <div class="staff-grid">
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="classroom-card">
+            <div class="classroom-header">
+              <h3 class="classroom-name">教室 2</h3>
+              <span class="classroom-badge">物語講座</span>
+            </div>
+            <div class="staff-grid">
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="classroom-card">
+            <div class="classroom-header">
+              <h3 class="classroom-name">教室 3</h3>
+              <span class="classroom-badge">物語講座</span>
+            </div>
+            <div class="staff-grid">
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="classroom-card">
+            <div class="classroom-header">
+              <h3 class="classroom-name">教室 4</h3>
+              <span class="classroom-badge">物語講座</span>
+            </div>
+            <div class="staff-grid">
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- 破（5チーム × 2教室 = 10教室） -->
+      <div class="course-content" data-course="ha" role="tabpanel">
+        <div class="team-list">
+          <!-- チーム1 -->
+          <div class="team-block">
+            <div class="team-header">
+              <h3 class="team-name">チーム 1</h3>
+              <div class="team-shihan">
+                <span class="staff-role">師範</span>
+                <span class="staff-name">－</span>
+              </div>
+            </div>
+            <div class="classroom-grid">
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 1</h4>
+                  <span class="classroom-badge">55破</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 2</h4>
+                  <span class="classroom-badge">55破</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+            </div>
+          </div>
+          <!-- チーム2 -->
+          <div class="team-block">
+            <div class="team-header">
+              <h3 class="team-name">チーム 2</h3>
+              <div class="team-shihan">
+                <span class="staff-role">師範</span>
+                <span class="staff-name">－</span>
+              </div>
+            </div>
+            <div class="classroom-grid">
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 3</h4>
+                  <span class="classroom-badge">55破</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 4</h4>
+                  <span class="classroom-badge">55破</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+            </div>
+          </div>
+          <!-- チーム3 -->
+          <div class="team-block">
+            <div class="team-header">
+              <h3 class="team-name">チーム 3</h3>
+              <div class="team-shihan">
+                <span class="staff-role">師範</span>
+                <span class="staff-name">－</span>
+              </div>
+            </div>
+            <div class="classroom-grid">
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 5</h4>
+                  <span class="classroom-badge">55破</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 6</h4>
+                  <span class="classroom-badge">55破</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+            </div>
+          </div>
+          <!-- チーム4 -->
+          <div class="team-block">
+            <div class="team-header">
+              <h3 class="team-name">チーム 4</h3>
+              <div class="team-shihan">
+                <span class="staff-role">師範</span>
+                <span class="staff-name">－</span>
+              </div>
+            </div>
+            <div class="classroom-grid">
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 7</h4>
+                  <span class="classroom-badge">55破</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 8</h4>
+                  <span class="classroom-badge">55破</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+            </div>
+          </div>
+          <!-- チーム5 -->
+          <div class="team-block">
+            <div class="team-header">
+              <h3 class="team-name">チーム 5</h3>
+              <div class="team-shihan">
+                <span class="staff-role">師範</span>
+                <span class="staff-name">－</span>
+              </div>
+            </div>
+            <div class="classroom-grid">
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 9</h4>
+                  <span class="classroom-badge">55破</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+              <article class="classroom-card">
+                <div class="classroom-header">
+                  <h4 class="classroom-name">教室 10</h4>
+                  <span class="classroom-badge">55破</span>
+                </div>
+                <div class="staff-item">
+                  <span class="staff-role">師範代</span>
+                  <span class="staff-name">－</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 花伝所 -->
+      <div class="course-content" data-course="kaden" role="tabpanel">
+        <div class="classroom-grid">
+          <article class="classroom-card">
+            <div class="classroom-header">
+              <h3 class="classroom-name">むらさき道場</h3>
+              <span class="classroom-badge">花伝所</span>
+            </div>
+            <div class="staff-grid">
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">花伝師範</span>
+                  <span class="staff-name">大濱 朋子</span>
+                </div>
+                <p class="staff-desc">テキストテキストテキスト</p>
+              </div>
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">錬成師範</span>
+                  <span class="staff-name">山崎 智章</span>
+                </div>
+                <p class="staff-desc">テキストテキストテキスト</p>
+              </div>
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">錬成師範</span>
+                  <span class="staff-name">齋藤 成憲</span>
+                </div>
+                <p class="staff-desc">テキストテキストテキスト</p>
+              </div>
+            </div>
+          </article>
+          <article class="classroom-card">
+            <div class="classroom-header">
+              <h3 class="classroom-name">やまぶき道場</h3>
+              <span class="classroom-badge">花伝所</span>
+            </div>
+            <div class="staff-grid">
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">花伝師範</span>
+                  <span class="staff-name">古谷 奈々</span>
+                </div>
+                <p class="staff-desc">テキストテキストテキスト</p>
+              </div>
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">錬成師範</span>
+                  <span class="staff-name">角山 祥道</span>
+                </div>
+                <p class="staff-desc">テキストテキストテキスト</p>
+              </div>
+              <div class="staff-item">
+                <div class="staff-image"></div>
+                <div class="staff-main">
+                  <span class="staff-role">錬成師範</span>
+                  <span class="staff-name">上原 悦子</span>
+                </div>
+                <p class="staff-desc">テキストテキストテキスト</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-logo">感門之盟</p>
+    <div class="footer-links">
+      <a href="https://es.isis.ne.jp/" target="_blank" rel="noopener noreferrer">イシス編集学校</a>
+      <a href="https://edist.isis.ne.jp/" target="_blank" rel="noopener noreferrer">エディスト</a>
+      <a href="info.html">お問い合わせ</a>
+    </div>
+    <p class="footer-copyright">&copy; イシス編集学校 All Rights Reserved.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

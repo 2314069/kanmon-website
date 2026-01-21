@@ -1,0 +1,79 @@
+/* ============================================
+   Scroll Animation
+   ============================================ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s, transform 0.8s;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   View Transitions
+   ============================================ */
+
+/* Enable View Transitions (for MPA) */
+@view-transition {
+  navigation: auto;
+}
+
+/* Set view-transition-name for page */
+html {
+  view-transition-name: root;
+}
+
+/* Wipe transition - outgoing page */
+::view-transition-old(root) {
+  animation: wipe-out 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Wipe transition - incoming page (curtain effect) */
+::view-transition-new(root) {
+  animation: wipe-in 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Current page - dims slightly while waiting */
+@keyframes wipe-out {
+  0% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(0.7);
+  }
+}
+
+/* New page - curtain swipe from left to right */
+@keyframes wipe-in {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Fallback for browsers without View Transitions support */
+@supports not (view-transition-name: root) {
+  body {
+    animation: simple-fade-in 0.3s ease-out;
+  }
+
+  @keyframes simple-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}
+
+/* Accessibility - reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}

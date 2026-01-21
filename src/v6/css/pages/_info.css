@@ -1,0 +1,73 @@
+/* ============================================
+   Info Cards (Info Page)
+   ============================================ */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.info-card {
+  background: var(--color-white);
+  padding: 40px;
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.info-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.info-card-icon {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.info-card-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-bg-dark);
+}
+
+.info-list {
+  list-style: none;
+}
+
+.info-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-bg-dark);
+  font-size: 15px;
+  line-height: 1.8;
+  position: relative;
+  padding-left: 1em;
+}
+
+.info-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--color-text-light);
+}
+
+.info-list li:last-child {
+  border-bottom: none;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .info-card {
+    padding: 24px;
+  }
+}

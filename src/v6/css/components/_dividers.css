@@ -1,0 +1,425 @@
+/* ============================================
+   Gate (門) Design Elements
+   ============================================ */
+
+/* Hero Gate Frame */
+.hero-gate {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-gate::before,
+.hero-gate::after {
+  content: '';
+  position: absolute;
+  background: var(--color-text);
+}
+
+/* Left/Right Pillars */
+.hero-gate::before {
+  top: 10%;
+  left: 5%;
+  width: 3px;
+  height: 80%;
+  opacity: 0.15;
+}
+
+.hero-gate::after {
+  top: 10%;
+  right: 5%;
+  width: 3px;
+  height: 80%;
+  opacity: 0.15;
+}
+
+/* Top Beam */
+.hero-gate-beam {
+  position: absolute;
+  top: 8%;
+  left: 5%;
+  right: 5%;
+  height: 2px;
+  background: var(--color-text);
+  opacity: 0.15;
+}
+
+.hero-gate-beam::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-text);
+  opacity: 1;
+}
+
+/* Section Gate Divider */
+.section-gate {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+  margin: 0 60px;
+}
+
+.section-gate::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.section-gate-icon {
+  position: relative;
+  z-index: 1;
+  width: 60px;
+  height: 40px;
+  background: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-gate-icon::before {
+  content: '';
+  width: 40px;
+  height: 30px;
+  border: 2px solid var(--color-text);
+  border-bottom: none;
+  position: relative;
+}
+
+.section-gate-icon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: var(--color-text);
+}
+
+/* SVG Gate Symbol */
+.gate-symbol {
+  width: 48px;
+  height: 36px;
+  position: relative;
+  z-index: 1;
+  background: var(--color-bg);
+  padding: 0 12px;
+}
+
+.gate-symbol svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================================
+   Book (本) Design Elements
+   ============================================ */
+
+/* Book+Gate Hybrid Separator */
+.section-divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+  margin: 0 60px;
+}
+
+.section-divider::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.book-gate {
+  position: relative;
+  z-index: 1;
+  width: 72px;
+  height: 48px;
+  background: var(--color-bg);
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-gate svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Bookshelf Background */
+.bookshelf-bg {
+  position: relative;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 118px,
+      #e8e8e8 118px,
+      #e0e0e0 120px,
+      transparent 120px
+    ),
+    var(--color-bg-dark);
+}
+
+.bookshelf-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    repeating-linear-gradient(
+      to right,
+      transparent 0px,
+      transparent 198px,
+      rgba(0, 0, 0, 0.03) 198px,
+      rgba(0, 0, 0, 0.03) 200px
+    );
+  pointer-events: none;
+}
+
+/* Interbooking Bookshelf Background */
+.interbooking-bookshelf {
+  background:
+    linear-gradient(to bottom,
+      rgba(250, 250, 250, 0.98) 0%,
+      rgba(250, 250, 250, 0.9) 50%,
+      rgba(250, 250, 250, 0.98) 100%
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 78px,
+      #ececec 78px,
+      #e8e8e8 80px
+    );
+}
+
+/* Paper Texture */
+.paper-texture {
+  background-color: var(--color-white);
+  background-image:
+    linear-gradient(90deg, transparent 79px, rgba(0,0,0,0.02) 79px, rgba(0,0,0,0.02) 81px, transparent 81px),
+    linear-gradient(rgba(0,0,0,0.015) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+}
+
+/* Page Corner Curl */
+.page-curl {
+  position: relative;
+  overflow: hidden;
+}
+
+.page-curl::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 32px 32px;
+  border-color: transparent transparent var(--color-bg-dark) transparent;
+  box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.page-curl:hover::after {
+  border-width: 0 0 48px 48px;
+}
+
+/* Page Flip Animation */
+.page-flip {
+  perspective: 1000px;
+}
+
+.page-flip-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-flip:hover .page-flip-inner {
+  transform: rotateY(-3deg);
+}
+
+/* Bookmark Ribbon */
+.bookmark-ribbon {
+  position: relative;
+}
+
+.bookmark-ribbon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 40px;
+  width: 24px;
+  height: 100px;
+  background: linear-gradient(
+    135deg,
+    #b0b0b0 0%,
+    #909090 50%,
+    #707070 100%
+  );
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% 85%,
+    50% 100%,
+    0% 85%
+  );
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+/* Bookmark Tag (for cards) */
+.bookmark-tag {
+  position: absolute;
+  top: 0;
+  right: 24px;
+  width: 28px;
+  height: 56px;
+  background: var(--color-text);
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% 80%,
+    50% 100%,
+    0% 80%
+  );
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10px;
+  color: var(--color-white);
+  font-size: 9px;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+
+/* Step Bookmark */
+.step-bookmark {
+  position: relative;
+  width: 48px;
+  height: 72px;
+  background: var(--color-text);
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% 85%,
+    50% 100%,
+    0% 85%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  font-family: var(--font-en);
+  font-size: 20px;
+  font-weight: 600;
+  flex-shrink: 0;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Open Book Visual */
+.book-visual {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.open-book-icon {
+  width: 120px;
+  height: 80px;
+  color: var(--color-text);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .bookmark-ribbon::before {
+    width: 20px;
+    height: 80px;
+    left: 24px;
+  }
+
+  .step-bookmark {
+    width: 40px;
+    height: 60px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .section-gate {
+    margin: 0 24px;
+    padding: 40px 0;
+  }
+
+  .hero-gate::before {
+    left: 3%;
+  }
+
+  .hero-gate::after {
+    right: 3%;
+  }
+
+  .hero-gate-beam {
+    left: 3%;
+    right: 3%;
+  }
+
+  .section-divider {
+    margin: 0 24px;
+    padding: 40px 0;
+  }
+
+  .bookmark-ribbon::before {
+    display: none;
+  }
+
+  .step-bookmark {
+    width: 36px;
+    height: 52px;
+    font-size: 16px;
+  }
+
+  .page-curl::after {
+    border-width: 0 0 24px 24px;
+  }
+
+  .bookshelf-bg,
+  .interbooking-bookshelf {
+    background: var(--color-bg-dark);
+  }
+
+  .bookshelf-bg::before {
+    display: none;
+  }
+
+  .book-gate {
+    width: 60px;
+    height: 40px;
+  }
+}
