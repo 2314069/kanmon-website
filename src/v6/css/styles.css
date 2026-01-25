@@ -16,6 +16,7 @@
 /* Sections */
 @import url('sections/_hero.css');
 @import url('sections/_about.css');
+@import url('sections/_message.css');
 @import url('sections/_timetable.css');
 @import url('sections/_gallery.css');
 @import url('sections/_speakers.css');
