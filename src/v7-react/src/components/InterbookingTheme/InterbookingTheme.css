@@ -1,0 +1,56 @@
+/* InterbookingTheme Component */
+.interbooking-intro {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.interbooking-lead {
+  font-size: 18px;
+  color: var(--color-text-light);
+  margin-bottom: 40px;
+}
+
+.interbooking-theme {
+  background: var(--color-bg-dark);
+  padding: 48px;
+  border-radius: 4px;
+}
+
+.book-visual {
+  margin-bottom: 24px;
+}
+
+.open-book-icon {
+  width: 80px;
+  height: 60px;
+  color: var(--color-text);
+  opacity: 0.6;
+}
+
+.interbooking-theme-label {
+  font-family: var(--font-en);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text-light);
+  margin-bottom: 16px;
+}
+
+.interbooking-theme-text {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.8;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .interbooking-theme {
+    padding: 32px 24px;
+  }
+
+  .interbooking-theme-text {
+    font-size: 20px;
+  }
+}

@@ -1,0 +1,261 @@
+/* ============================================
+   Hero Section
+   ============================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 60px 80px;
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  align-items: center;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-label {
+  font-family: var(--font-en);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-label::before {
+  content: '';
+  width: 40px;
+  height: 2px;
+  background: var(--color-accent);
+}
+
+.hero-title {
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  line-height: 1.3;
+  margin-bottom: 24px;
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--color-text-light);
+  margin-bottom: 40px;
+}
+
+.hero-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--color-accent);
+  color: var(--color-white);
+  padding: 16px 32px;
+  font-family: var(--font-en);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+}
+
+.hero-visual {
+  position: relative;
+  will-change: transform;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Count-up number */
+.count-up {
+  display: inline-block;
+  min-width: 0.6em;
+}
+
+/* ============================================
+   Staggered Entrance Animation
+   ============================================ */
+@keyframes hero-appear {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-content .hero-label,
+.hero-content .hero-title,
+.hero-content .hero-subtitle,
+.hero-content .hero-date {
+  opacity: 0;
+  animation: hero-appear 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.hero-content .hero-label   { animation-delay: 0.1s; }
+.hero-content .hero-title   { animation-delay: 0.3s; }
+.hero-content .hero-subtitle { animation-delay: 0.5s; }
+.hero-content .hero-date    { animation-delay: 0.7s; }
+
+/* ============================================
+   Gate Entrance Animation
+   ============================================ */
+.hero-gate {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-gate::before,
+.hero-gate::after {
+  content: '';
+  position: absolute;
+  background: var(--color-text);
+  opacity: 0;
+  transform-origin: top;
+  animation: gate-descend 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+}
+
+.hero-gate::before {
+  top: 10%;
+  left: 5%;
+  width: 3px;
+  height: 80%;
+}
+
+.hero-gate::after {
+  top: 10%;
+  right: 5%;
+  width: 3px;
+  height: 80%;
+}
+
+.hero-gate-beam {
+  position: absolute;
+  top: 8%;
+  left: 5%;
+  right: 5%;
+  height: 2px;
+  background: var(--color-text);
+  opacity: 0;
+  transform-origin: top;
+  animation: gate-descend 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0s forwards;
+}
+
+.hero-gate-beam::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-text);
+}
+
+@keyframes gate-descend {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 0.15;
+  }
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-visual {
+    order: -1;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .hero-label {
+    justify-content: center;
+  }
+
+  .hero-title {
+    font-size: 48px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 100px 24px 60px;
+  }
+
+  .hero-title {
+    font-size: 32px;
+  }
+
+  .hero-subtitle {
+    font-size: 15px;
+  }
+
+  .hero-gate::before { left: 3%; }
+  .hero-gate::after { right: 3%; }
+  .hero-gate-beam { left: 3%; right: 3%; }
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .hero-content .hero-label,
+  .hero-content .hero-title,
+  .hero-content .hero-subtitle,
+  .hero-content .hero-date {
+    opacity: 1;
+    animation: none;
+  }
+
+  .hero-gate::before,
+  .hero-gate::after,
+  .hero-gate-beam {
+    opacity: 0.15;
+    animation: none;
+  }
+
+  .hero-image {
+    animation: none;
+  }
+}

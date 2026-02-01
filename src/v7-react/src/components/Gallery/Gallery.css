@@ -1,0 +1,41 @@
+/* ============================================
+   Gallery Section
+   ============================================ */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.1);
+}
+
+.gallery-year {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 4px 12px;
+  font-family: var(--font-en);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+}
+
+/* Swiper overrides */
+.gallery-carousel .swiper-button-prev,
+.gallery-carousel .swiper-button-next {
+  color: var(--color-text);
+}
+
+.gallery-carousel .swiper-pagination-bullet-active {
+  background: var(--color-text);
+}

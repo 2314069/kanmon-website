@@ -1,0 +1,44 @@
+.apply-info {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.apply-event {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.apply-subtitle {
+  font-size: 16px;
+  color: var(--color-text-light);
+  margin-bottom: 40px;
+}
+
+.apply-details {
+  text-align: left;
+}
+
+.apply-detail-row {
+  display: flex;
+  gap: 24px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.apply-detail-row dt {
+  font-weight: 600;
+  min-width: 60px;
+}
+
+.apply-detail-row dd {
+  color: var(--color-text-light);
+}
+
+.apply-note {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--color-text-light);
+}

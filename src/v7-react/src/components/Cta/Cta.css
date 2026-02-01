@@ -1,0 +1,98 @@
+/* ============================================
+   CTA Section
+   ============================================ */
+.cta {
+  background: var(--color-accent);
+  color: var(--color-white);
+  text-align: center;
+  padding: 100px 60px;
+}
+
+.cta-title {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  margin-bottom: 16px;
+}
+
+.cta-subtitle {
+  font-size: 16px;
+  opacity: 0.9;
+  margin-bottom: 40px;
+}
+
+/* ============================================
+   CTA Animations
+   ============================================ */
+@keyframes cta-gradient {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes btn-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+  70%  { box-shadow: 0 0 0 12px rgba(255, 255, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+
+@keyframes cta-appear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cta.cta-animated {
+  background: linear-gradient(135deg, #1a1a1a 0%, #333333 50%, #1a1a1a 100%);
+  background-size: 200% 200%;
+  animation: cta-gradient 6s ease infinite;
+}
+
+.cta.cta-animated .cta-title,
+.cta.cta-animated .cta-subtitle,
+.cta.cta-animated .btn {
+  opacity: 0;
+  animation: cta-appear 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.cta.cta-animated .cta-title    { animation-delay: 0s; }
+.cta.cta-animated .cta-subtitle { animation-delay: 0.2s; }
+.cta.cta-animated .btn {
+  animation: cta-appear 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards,
+             btn-pulse 2s ease-in-out 1s infinite;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 600px) {
+  .cta {
+    padding: 60px 24px;
+  }
+
+  .cta-title {
+    font-size: 24px;
+  }
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .cta.cta-animated {
+    background: var(--color-accent);
+    animation: none;
+  }
+
+  .cta.cta-animated .cta-title,
+  .cta.cta-animated .cta-subtitle,
+  .cta.cta-animated .btn {
+    opacity: 1;
+    animation: none;
+  }
+}
